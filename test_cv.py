@@ -52,6 +52,21 @@ class PublicCV(unittest.TestCase):
             self.assertTrue(r.get("company"), r["title"])
             self.assertTrue(r.get("period"), r["title"])
 
+    def test_all_prose_is_text_not_structure(self):
+        # YAML reads an unquoted "Topic: detail" as a mapping, so the bullet
+        # silently becomes a dict and renders as a Python literal on the page.
+        for r in CV["experience"]:
+            for b in r.get("bullets") or []:
+                self.assertIsInstance(b, str, f"{r['title']}: {b!r}")
+        for s in CV["skills"]:
+            for i in s["items"]:
+                self.assertIsInstance(i, str, f"{s['group']}: {i!r}")
+
+    def test_no_python_literal_reaches_the_page(self):
+        for marker in ("{'", "': '", "[{"):
+            self.assertNotIn(marker, self.page,
+                             f"structure leaked into rendered text: {marker}")
+
     def test_every_project_declares_its_stack(self):
         for p in CV["projects"]:
             self.assertTrue(p.get("tech"), p["title"])
