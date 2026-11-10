@@ -1,0 +1,5 @@
+__pycache__/
+*.py[cod]
+cv.html
+_site/
+.DS_Store

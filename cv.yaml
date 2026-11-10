@@ -1,0 +1,195 @@
+# The CV is data. build.py turns it into the page; nothing is formatted by hand.
+#
+# Rule for this public version: employers are named, clients are described.
+# Naming a former employer is ordinary CV practice. Naming a client on a public
+# page is the client's call, not mine — so they appear here by sector and size.
+
+person:
+  name: Leonardo Bornhäußer
+  headline: Technical Product Owner · Cloud, Microservices & AI · Regulated environments
+  location: Berlin, Germany · remote
+  email: leonardo@creativate.tech
+  links:
+    - { label: LinkedIn, url: "https://www.linkedin.com/in/leonardo-bornhäußer/" }
+    - { label: GitHub,   url: "https://github.com/adminleo" }
+    - { label: ORCID,    url: "https://orcid.org/0009-0005-6464-5179" }
+
+summary: >-
+  Technical product owner and the interface between business and engineering:
+  more than ten years in software projects, more than six years of SaaS
+  products, more than four years deep in applied AI. I analyse and prioritise
+  requirements, guide agile teams through planning, reviews and refinement, and
+  take architecture and technology decisions from microservices and CI/CD to
+  cloud and on-premise; hands-on in Python and TypeScript, Java/Spring Boot at
+  architecture level. I know regulated environments from the inside — the German
+  savings banks group, public administration, and C-level work with listed
+  financial and healthcare groups. As co-founder of a company builder I built
+  and led international, multilingual teams of roughly 100 people. German native
+  speaker, English at C2 level.
+
+kpis:
+  - { figure: "10+",       label: "years in software projects" }
+  - { figure: "7+",        label: "products taken to production" }
+  - { figure: "1 M+",      label: "lines of code since 01/2026, built agentically" }
+  - { figure: "~€3 M",     label: "funding and financing raised" }
+  - { figure: "~100",      label: "people led internationally" }
+  - { figure: "BSFZ 2026", label: "R&D certified (German research allowance)" }
+
+experience:
+  - title: Founder & Technical Product Owner
+    company: Creativate Technologies GmbH
+    period: Apr 2024 – present
+    location: Berlin · remote · internationally distributed, multilingual team
+    summary: >-
+      Technical product ownership for AI software from requirement to
+      operations. Public-sector focus: EU-sovereign, on-premise-capable AI and
+      agent systems, built with consultancies as an alternative to third-country
+      providers.
+    bullets:
+      - Analysed, prioritised and shepherded requirements; made architecture and technology decisions; agile delivery (Scrum/Kanban) with planning, reviews and refinement
+      - Built a knowledge-graph decision-intelligence platform from the first line of code to a productive on-premise proof of concept with a city administration and to enterprise tenants; in 2026 replaced the monolith with a service platform including dedicated identity (OIDC) and billing services
+      - Introduced an AI-enabled engineering operating model — ticket as specification, agents with MCP access, human review and tests, a confirmation gate before irreversible actions, AI consumption tracked per project and role
+      - Product management in publicly funded R&D: consortium rounds, roadmap steered against funding goals, ~€2.5 M funding volume coordinated; lead of a BSFZ-certified R&D project on the German Deutschland-Stack and FITKO standards (XÖV, FIM/LeiKa, NOOTS)
+      - Regulated environments: AI architecture and business value at C-level with a stock-exchange group, a listed commercial-property bank and a DAX-listed healthcare group
+
+  - title: Co-Founder & Head of Operations
+    company: Camsol group — company builder (today seventy2 Holding GmbH)
+    period: Nov 2022 – Apr 2025
+    location: Berlin · locations in Europe, sub-Saharan Africa and South Asia
+    summary: >-
+      Company builder with an incubator and pre-seed/seed investments, including
+      a nearshore/offshore delivery company and a joint venture with a Pakistani
+      partner. Owned operations, delivery and roadmaps across the portfolio.
+    bullets:
+      - Scaled from 2 founders to ~100 people across Europe, Africa and South Asia; built 6 GmbHs and 2 Ltds
+      - Established the delivery model — requirements, acceptance and escalation in Germany, execution by international teams; led design, frontend, backend and security via OKRs and project KPIs
+      - Took the incubator portfolio to first paying customers; financed and partly exited ventures
+      - Political groundwork for the model: 2023 talks with members of the German Bundestag on tech partnerships with sub-Saharan Africa
+
+  - title: Product Designer & Project Manager
+    company: Karla Plattform GmbH · Sparkassen-Finanzgruppe
+    period: Apr 2021 – Oct 2022
+    location: Greifswald · Java-centric enterprise finance environment
+    summary: >-
+      Beyond-banking venture of the German savings banks group, mandated by the
+      DSGV: took the platform from concept to roll-out, holding business units,
+      engineering and the executive board together in a heavily regulated
+      environment.
+    bullets:
+      - Designed and delivered a headless CMS and a multi-vendor commerce system, with interfaces to the group's Java-based core systems
+      - Proxy product owner for three shareholder savings banks: consolidated and prioritised requirements, prepared committee decisions, reported to the executive board
+      - Pitched jointly with the board to the German Savings Banks Association: €500,000 in funding secured
+
+  - title: Transformation & Technology Consultant (ExO)
+    company: Bornhäußer & Friends GmbH
+    period: Jul 2019 – Sep 2021
+    location: Berlin
+    summary: Consulting on architecture, technology and organisational transformation; modernisation of technology stacks.
+
+skills:
+  - group: Technical product ownership & delivery
+    items: [Requirements analysis & prioritisation, Backlog refinement, Sprint planning & reviews, Business–engineering interface, Architecture decisions · ADRs, Scrum / Kanban, Team leadership via OKRs / KPIs, Funded and consortium projects, Nearshore/offshore delivery]
+  - group: AI in the SDLC & agents
+    items: [Agentic coding workflows, Anthropic / OpenAI / Gemini APIs, Ollama on-premise inference, MCP, Knowledge graphs · GraphRAG, Model routing & cost control, Confirmation gates & provenance, Evals & offline test gates, Developer enablement]
+  - group: Tech, cloud & data
+    items: [Python · TypeScript, FastAPI · Next.js, Java / Spring Boot (advisory), Microservices · REST / OpenAPI, Docker · Kubernetes, CI/CD · DevOps, AWS / Azure / GCP, On-premise / air-gapped, PostgreSQL / pgvector · MongoDB · graph DB, Monitoring & observability]
+  - group: Regulated environments & compliance
+    items: [German savings banks group, Listed finance and healthcare groups (C-level), Public sector & consulting partners, On-premise PoC with a city administration, Deutschland-Stack / FITKO, EU-sovereign AI, EU AI Act · GDPR, Information security, BSI baseline protection (basics)]
+
+projects:
+  - title: "Neurosymbolic reasoning layer — propose neurally, verify symbolically"
+    period: 2026 – present · founder, architect & lead · publicly funded R&D
+    tech: Python · knowledge graph · OWL/SHACL-style constraints · GraphRAG · open models · automated test suite
+    summary: >-
+      Bind language-model output claim by claim to a grounded knowledge graph:
+      supported or open, never guessed. Claim decomposition, check against the
+      graph, verdict; symbolic inference with provenance, and a citation path
+      that runs deterministically without a model. Grounded on official
+      registers and standards (ELI, EUR-Lex, ECLI, NACE, CPV, XÖV, FIM/LeiKa,
+      EuroVoc, Eurostat and others), refreshed through source adapters, and
+      positioned as a verifiable semantic layer for the Deutschland-Stack.
+
+  - title: "AI application and funding assistant for the public sector"
+    period: 2026 – present · founder & lead
+    tech: Python · Next.js/TypeScript · Java 21 / Spring Boot 3 · PostgreSQL · Docker · GitHub Actions · AWS
+    summary: >-
+      Pre-filled applications and funding research for public services. Behind
+      it a data mesh of structured records as the grounding layer and a
+      rule-based Spring Boot routing service that assigns a request
+      deterministically and verifiably to the responsible authority.
+      Traceability and data sovereignty as design constraints.
+
+  - title: "AI-enabled engineering operating model"
+    period: 2024 – present · owner · over 1 million lines of code since 01/2026
+    tech: Agentic coding · Anthropic/OpenAI/Gemini APIs · Ollama on-premise · MCP · GitHub Actions · ADRs · offline test gates
+    summary: >-
+      Make AI-assisted delivery measurable, controllable and affordable: ticket
+      as specification, agents implement with MCP access to repository, database
+      and APIs, humans review and test, confirmation gate before every
+      irreversible action. Consumption tracked per project and role, cost
+      controlled through model routing and smaller models where they suffice.
+      Quality gates instead of trust: contracts, hermetic offline tests, ADRs as
+      the team's memory.
+
+  - title: "Three SaaS products to paying customers"
+    period: 2025 – 2026 · founder & lead
+    tech: Next.js/TypeScript · FastAPI/Python · Tauri · Stripe · magic-link auth · OAuth · AWS
+    summary: >-
+      A B2B lead engine with ICP scoring, multi-tenancy, billing and CRM
+      integrations; a voice-note-to-task assistant as SaaS and signed desktop
+      app; and a trilingual AI readiness check with an automated PDF report.
+      Positioning, pricing and service boundaries owned end to end; after market
+      feedback, folded into the platform as building blocks rather than run
+      separately.
+
+  - title: "Knowledge-graph decision intelligence — open-core platform"
+    period: 2024 – present · founder, architect & lead
+    tech: Next.js/TypeScript · Python/FastAPI microservices · PostgreSQL/pgvector · graph DB · GPU worker · Docker · Kubernetes/Terraform · AGPL-3.0 + commercial licence
+    summary: >-
+      Bind language models to a verifiable knowledge store: auditable, cloud or
+      fully on-premise and air-gapped. Built from zero as an MVP; in 2026 the
+      monolith was replaced by a service platform with dedicated identity and
+      billing services. Open core — a tenant is configuration, extensions arrive
+      as plugins through a contract and registry, while the invariants
+      (grounding, tenant isolation, mandatory provenance, confirmation gate)
+      stay in the core. Domain agents with agent-to-agent delegation, read-only
+      by default, served over MCP. Single-command deployment on customer
+      hardware with local GPU inference.
+
+  - title: "Breast-cancer early detection — native mobile and web"
+    period: 2023 – 2025 · head of operations / venture lead
+    tech: Native iOS/Android · web · MongoDB · AI companion · ultrasound analysis (BI-RADS)
+    summary: >-
+      Self-examination and referral to specialists in underserved regions, with
+      a clinical tool producing a radiologist-reviewed BI-RADS report. Product
+      management with clinical and regulatory stakeholders; privacy by design
+      for sensitive health data.
+
+  - title: "IoT CO₂ monitoring and ESG reporting"
+    period: 2022 – 2024 · head of operations / venture lead
+    tech: IoT sensors (LTE-M, battery-powered) · cloud analytics · headless CMS · web dashboard
+    summary: >-
+      Replaced manual gas-cylinder monitoring across sites: sensors to cloud to
+      a dashboard with consumption forecast and automatic re-ordering, with
+      TRGS-510 compliance and ESG reporting. Built in an incubator and taken to
+      enterprise customers in automotive services, catering, fashion and banking.
+
+education:
+  - title: International Business Administration (B.A.) · Business Administration (B.Sc.)
+    note: no degree awarded
+    period: ≈ 90 ECTS · GPA 1.7 (German scale)
+    company: BSP Business School Berlin · University of Greifswald
+  - title: Certificates and programmes
+    period: 2020 – 2025
+    company: OpenExO · Ironhack · Futury
+    note: Certified ExO Consultant; UX/UI design bootcamp; accelerator programme
+
+languages:
+  - { name: German,  level: native }
+  - { name: English, level: "C2 · fully business-fluent (English-language schooling)" }
+
+research: >-
+  Applied AI research in an EU consortium with academic and Fraunhofer
+  partners, with practice transfer through a public-sector consultancy;
+  German research allowance approved (BSFZ, 2026); member of the German AI
+  Association (KI Bundesverband) since 2026.
