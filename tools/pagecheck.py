@@ -60,19 +60,26 @@ def main() -> int:
         # scrollHeight lies here: the columns carry min-height:100%, so they
         # always report at least the sheet height whether or not the content
         # fits. Measure the bottom of the last child instead.
+        # "have" is the column's own height, not the sheet's: a footer is its
+        # own grid row and takes that height away from the columns, so judging
+        # the content against the full page silently granted it space the
+        # footer had already spent.
         sheets = p.evaluate("""() => [...document.querySelectorAll('.sheet')]
             .map(s => {
               const cols = [...s.querySelectorAll('.side,.main')];
-              const want = Math.max(...cols.map(c => {
-                const top = c.getBoundingClientRect().top;
+              const room = cols.map(c => {
+                const box = c.getBoundingClientRect();
                 const pad = parseFloat(getComputedStyle(c).paddingBottom);
                 const kids = [...c.children];
-                if (!kids.length) return 0;
-                const low = Math.max(...kids.map(k =>
-                  k.getBoundingClientRect().bottom));
-                return Math.round(low - top + pad);
-              }));
-              return {want, have: Math.round(s.getBoundingClientRect().height)};
+                const low = kids.length
+                  ? Math.max(...kids.map(k => k.getBoundingClientRect().bottom))
+                  : box.top;
+                return {want: Math.round(low - box.top + pad),
+                        have: Math.round(box.height)};
+              });
+              // The tightest column decides the sheet.
+              return room.reduce((a, b) =>
+                (a.have - a.want) <= (b.have - b.want) ? a : b);
             })""")
         p.pdf(path=str(pdf), prefer_css_page_size=True, print_background=True)
         browser.close()
