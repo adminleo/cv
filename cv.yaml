@@ -36,15 +36,16 @@ kpis:
   - { figure: "BSFZ 2026", label: "R&D certified (German research allowance)" }
 
 experience:
-  - title: Founder & Technical Product Owner
+  - title: Technical Product Owner & Founder
     company: Creativate Technologies GmbH
     period: Apr 2024 – present
-    location: Berlin · remote · internationally distributed, multilingual team
+    location: Frankfurt am Main · remote · internationally distributed, multilingual team
     summary: >-
-      Technical product ownership for AI software from requirement to
-      operations. Public-sector focus: EU-sovereign, on-premise-capable AI and
-      agent systems, built with consultancies as an alternative to third-country
-      providers.
+      Since 10/2026 in full-time further education (data science); this role
+      reduced to 5–10 hours a week — available full time. Technical product
+      ownership for AI software from requirement to operations. Public-sector
+      focus: EU-sovereign, on-premise-capable AI and agent systems, built with
+      consultancies as an alternative to third-country providers.
     bullets:
       - Analysed, prioritised and shepherded requirements; made architecture and technology decisions; agile delivery (Scrum/Kanban) with planning, reviews and refinement
       - Built a knowledge-graph decision-intelligence platform from the first line of code to a productive on-premise proof of concept with a city administration and to enterprise tenants; in 2026 replaced the monolith with a service platform including dedicated identity (OIDC) and billing services

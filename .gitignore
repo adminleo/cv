@@ -3,3 +3,4 @@ __pycache__/
 cv.html
 _site/
 .DS_Store
+.venv/
