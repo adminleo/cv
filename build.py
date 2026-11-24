@@ -49,13 +49,19 @@ body{margin:0;background:#eceef2;color:var(--ink);
 .contact a{color:var(--muted);text-decoration:none}
 .contact a:hover{color:var(--accent)}
 
-h2{margin:1.4rem 0 .6rem;font-size:.82rem;font-weight:700;letter-spacing:.09em;
+h2{display:flex;align-items:center;gap:.38rem;
+  margin:1.4rem 0 .6rem;font-size:.82rem;font-weight:700;letter-spacing:.09em;
   text-transform:uppercase;color:var(--accent)}
+h2 svg{width:13px;height:13px;flex:0 0 auto;stroke-width:2.1}
 .side h2:first-of-type{margin-top:0}
 h3{margin:.95rem 0 .3rem;font-size:.7rem;font-weight:700;letter-spacing:.07em;
   text-transform:uppercase;color:var(--sub)}
 .side ul{margin:0;padding-left:.85rem}
 .side li{font-size:.79rem;color:#3c414c;margin:.16rem 0}
+/* Skills as chips, not bullets. Nine one-line bullets per group is a column
+   of ragged ends; the same nine set as chips fill their width and read as
+   one field of competence rather than a ranked list, which they never were. */
+.chips{display:flex;flex-wrap:wrap;gap:.2rem .22rem;margin:.12rem 0 .1rem}
 
 /* Bars. The figure is never printed — a number invites an argument about
    whether it should be 85 or 90, which is not the point. The point is the
@@ -73,6 +79,8 @@ h3{margin:.95rem 0 .3rem;font-size:.7rem;font-weight:700;letter-spacing:.07em;
 .world .halo{fill:var(--accent);opacity:.2}
 .world .pin{fill:var(--accent)}
 .map-note{margin:0;font-size:.73rem;color:var(--muted);line-height:1.35}
+.qr{display:block;width:27mm;height:27mm;margin:.2rem 0 .3rem;fill:var(--ink);
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
 
 h1{margin:0;font-size:2.25rem;line-height:1.08;letter-spacing:-.02em;
   font-weight:750;color:var(--accent)}
@@ -207,6 +215,34 @@ def photo() -> str:
     return (f'<img class="avatar" alt="" src="data:image/png;base64,{data}">')
 
 
+def _i(d):
+    """One line icon, drawn on the 24-grid everything else here uses."""
+    return ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+            f'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{d}</svg>')
+
+
+# Headings carry a mark so the eye can find a section without reading it.
+# One family, one weight, one grid — a heading with a logo-ish glyph beside it
+# reads as a badge, and a CV has no badges.
+SECTION = dict(
+    strengths=_i('<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>'),
+    skills=_i('<path d="M12 3 2 9l10 6 10-6z"/><path d="m2 15 10 6 10-6"/>'),
+    map=_i('<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/>'
+           '<path d="M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18"/>'),
+    languages=_i('<path d="M4 5h16v10h-9l-5 4v-4H4z"/>'),
+    marks=_i('<circle cx="12" cy="8" r="5"/><path d="M8.5 12.5 7 22l5-3 5 3-1.5-9.5"/>'),
+    experience=_i('<rect x="2" y="7" width="20" height="13" rx="2"/>'
+                  '<path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>'),
+    education=_i('<path d="m2 9 10-5 10 5-10 5z"/>'
+                 '<path d="M6 11v5c0 1.1 2.7 2 6 2s6-.9 6-2v-5"/>'),
+    projects=_i('<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5'
+                'a2 2 0 0 1-2-2z"/>'),
+    qr=_i('<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>'
+          '<rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM19 19h2v2h-2z"/>'),
+    publications=_i('<path d="M6 2h8l4 4v16H6z"/><path d="M14 2v5h4"/>'
+                    '<path d="M9 13h6M9 17h6"/>'),
+)
+
 ICONS = dict(
     pin='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
     mail='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-9 5.7a2 2 0 0 1-2 0L2 7"/></svg>',
@@ -238,6 +274,35 @@ def bars(items):
         f'<div class="bar"><div class="bar-n">{e(b["name"])}</div>'
         f'<div class="bar-t"><div class="bar-f" style="width:{int(b["level"])}%"></div></div>'
         f'</div>' for b in items)
+
+
+def qr():
+    """The CV's own address, as something a phone can read off paper.
+
+    The matrix is committed (tools/build_qr.py); here it only becomes squares.
+    Horizontal runs are merged into one rect each, which roughly halves the
+    markup for nothing in return but a smaller file.
+    """
+    f = HERE / "assets" / "qr-cv.txt"
+    if not f.exists():
+        return ""
+    rows = [l for l in f.read_text().splitlines() if l and not l.startswith("#")]
+    n = len(rows)
+    rects = []
+    for y, row in enumerate(rows):
+        x = 0
+        while x < n:
+            if row[x] == "1":
+                run = 1
+                while x + run < n and row[x + run] == "1":
+                    run += 1
+                rects.append(f'<rect x="{x}" y="{y}" width="{run}" height="1"/>')
+                x += run
+            else:
+                x += 1
+    return (f'<svg class="qr" viewBox="0 0 {n} {n}" role="img" '
+            f'aria-label="QR code for the online CV" shape-rendering="crispEdges">'
+            f'{"".join(rects)}</svg>')
 
 
 def world(cfg):
@@ -298,10 +363,6 @@ def render(cv):
     links = " · ".join(f'<a href="{e(l["url"])}">{e(l["label"])}</a>' for l in p["links"])
     kpis = "".join(f'<div class="kpi"><div class="fig">{e(k["figure"])}</div>'
                    f'<div class="lab">{e(k["label"])}</div></div>' for k in cv["kpis"])
-    skills = "".join(
-        f'<div class="skill"><div class="skill-name">{e(s["group"])}</div><div class="chips">'
-        + "".join(f'<span class="chip">{e(i)}</span>' for i in s["items"])
-        + "</div></div>" for s in cv["skills"])
     # A language is the one skill where a bar is not a self-flattering guess:
     # the levels are the CEFR scale, and native is the top of it.
     lang_bars = [dict(name=f'{l["name"]} — {l["level"]}',
@@ -314,9 +375,9 @@ def render(cv):
                 for l in p["links"]]
 
     def skill_block(groups):
-        return "".join(f'<h3>{e(g["group"])}</h3><ul>'
-                       + "".join(f"<li>{e(i)}</li>" for i in g["items"]) + "</ul>"
-                       for g in groups)
+        return "".join(f'<h3>{e(g["group"])}</h3><div class="chips">'
+                       + "".join(f'<span class="chip">{e(i)}</span>' for i in g["items"])
+                       + "</div>" for g in groups)
 
     # Three projects on the page, the rest on GitHub. Seven of them at
     # paragraph length was a third sheet, and a CV that runs to three pages is
@@ -362,11 +423,11 @@ def render(cv):
   <aside class="side">
     {photo()}
     <ul class="contact">{''.join(contact)}</ul>
-    <h2>Strengths</h2>
+    <h2>{SECTION["strengths"]}Strengths</h2>
     {bars(cv.get('strengths', []))}
-    <h2>Skills</h2>
-    {skill_block(cv['skills'][:2])}
-    <h2>Where the work was</h2>
+    <h2>{SECTION["skills"]}Skills</h2>
+    {skill_block(cv['skills'][:2] + cv['skills'][3:])}
+    <h2>{SECTION["map"]}Where the work was</h2>
     {world(cv.get('map'))}
   </aside>
   <section class="main">
@@ -374,7 +435,7 @@ def render(cv):
     <p class="headline">{e(p['headline'])}</p>
     <p class="summary">{e(cv['summary'])}</p>
     <div class="kpis">{kpis}</div>
-    <h2>Experience</h2>
+    <h2>{SECTION["experience"]}Experience</h2>
     <div class="tl">{''.join(role(r) for r in cv['experience'][:2])}</div>
   </section>
   {foot(1, 'Technical Product Owner · ' + e(p['email']))}
@@ -382,28 +443,31 @@ def render(cv):
 
 <main class="sheet">
   <aside class="side">
-    <h2>Skills</h2>
-    {skill_block(cv['skills'][2:])}
-    <h2>Languages</h2>
+    <h2>{SECTION["skills"]}Skills</h2>
+    {skill_block(cv['skills'][2:3])}
+    <h2>{SECTION["languages"]}Languages</h2>
     {bars(lang_bars)}
-    <h2>Funded, certified, member of</h2>
+    <h2>{SECTION["marks"]}Funded, certified, member of</h2>
     <div class="marks">
       {logo('bmftr', 'German Federal Ministry of Research, Technology and Space', 38)}
       {logo('bsfz-siegel', 'BSFZ — research allowance certified 2026', 38)}
       {logo('ki-bundesverband', 'German AI Association', 21)}
       {ki_park}
     </div>
+    <h2>{SECTION["qr"]}This CV, online</h2>
+    {qr()}
+    <p class="map-note">adminleo.github.io/cv<br>Always the current version.</p>
   </aside>
   <section class="main">
-    <h2>Experience</h2>
+    <h2>{SECTION["experience"]}Experience</h2>
     <div class="tl">{''.join(role(r) for r in cv['experience'][2:])}</div>
-    <h2>Education</h2>
+    <h2>{SECTION["education"]}Education</h2>
     {''.join(edu(x) for x in cv['education'])}
-    <h2>Selected projects</h2>
+    <h2>{SECTION["projects"]}Selected projects</h2>
     {''.join(project(x) for x in shown)}
     <p class="note">The rest, with code and findings: <a href="https://github.com/adminleo">github.com/adminleo</a></p>
 
-    <h2>Publications</h2>
+    <h2>{SECTION["publications"]}Publications</h2>
     {publications}
 
   </section>

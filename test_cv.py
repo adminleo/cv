@@ -104,6 +104,31 @@ class PublicCV(unittest.TestCase):
         self.assertIn("orcid.org", self.page)
 
 
+class TestTheQRCode(unittest.TestCase):
+    """A QR code that does not scan is worse than no QR code: it is printed on
+    the page claiming to work. The matrix comes from a real encoder, so the
+    only thing that can break it here is the drawing — rects are merged across
+    horizontal runs, and an off-by-one in that merge is invisible to the eye.
+    So read the drawing back and compare it with the matrix."""
+
+    def setUp(self):
+        self.rows = [l for l in (ROOT / "assets" / "qr-cv.txt").read_text().splitlines()
+                     if l and not l.startswith("#")]
+
+    def test_the_drawing_matches_the_matrix(self):
+        n = len(self.rows)
+        grid = [["0"] * n for _ in range(n)]
+        for x, y, w in re.findall(
+                r'<rect x="(\d+)" y="(\d+)" width="(\d+)" height="1"/>', build.qr()):
+            for i in range(int(w)):
+                grid[int(y)][int(x) + i] = "1"
+        self.assertEqual(["".join(r) for r in grid], self.rows)
+
+    def test_it_points_at_the_live_cv(self):
+        head = (ROOT / "assets" / "qr-cv.txt").read_text().splitlines()[0]
+        self.assertEqual(head, "# https://adminleo.github.io/cv")
+
+
 class TestThePortrait(unittest.TestCase):
     """The page is one file. The photo has to travel inside it."""
 
