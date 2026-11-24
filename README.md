@@ -10,9 +10,17 @@ separate PDF toolchain to keep alive.
 
 ```bash
 pip install pyyaml
-python3 build.py              # -> cv.html
-python3 -m unittest test_cv   # the guards below
+python3 build.py                  # -> cv.html
+python3 -m unittest test_cv       # the guards below
+python3 tools/pagecheck.py        # does it still print on two pages?
 ```
+
+The page is laid out as two fixed A4 sheets, each with its own sidebar — a grid
+column does not repeat its background across a page break, so a single flowing
+column would lose the grey on page two. `tools/pagecheck.py` renders the way a
+printer does, at 210 mm width rather than a browser window, and fails if the
+PDF is not exactly two pages. Run it after touching `cv.yaml`; "two pages" is a
+property that breaks silently.
 
 ## Why do it this way
 

@@ -102,14 +102,10 @@ projects:
     period: 2026 – present · founder, architect & lead · publicly funded R&D
     tech: Python · knowledge graph · OWL/SHACL-style constraints · GraphRAG · open models · automated test suite
     summary: >-
-      Bind language-model output claim by claim to a grounded knowledge graph:
-      supported or open, never guessed. Claim decomposition, check against the
-      graph, verdict; symbolic inference with provenance, and a citation path
-      that runs deterministically without a model. Grounded on official
-      registers and standards (ELI, EUR-Lex, ECLI, NACE, CPV, XÖV, FIM/LeiKa,
-      EuroVoc, Eurostat and others), refreshed through source adapters, and
-      positioned as a verifiable semantic layer for the Deutschland-Stack.
-
+      Model output bound claim by claim to a grounded graph: supported or open,
+      never guessed. Decomposition, check, verdict — with a citation path that runs
+      deterministically, without a model. Grounded on official registers and
+      standards, refreshed through source adapters.
   - title: "AI application and funding assistant for the public sector"
     period: 2026 – present · founder & lead
     tech: Python · Next.js/TypeScript · Java 21 / Spring Boot 3 · PostgreSQL · Docker · GitHub Actions · AWS
@@ -124,13 +120,10 @@ projects:
     period: 2024 – present · owner · over 1 million lines of code since 01/2026
     tech: Agentic coding · Anthropic/OpenAI/Gemini APIs · Ollama on-premise · MCP · GitHub Actions · ADRs · offline test gates
     summary: >-
-      Make AI-assisted delivery measurable, controllable and affordable: ticket
-      as specification, agents implement with MCP access to repository, database
-      and APIs, humans review and test, confirmation gate before every
-      irreversible action. Consumption tracked per project and role, cost
-      controlled through model routing and smaller models where they suffice.
-      Quality gates instead of trust: contracts, hermetic offline tests, ADRs as
-      the team's memory.
+      Ticket as specification, agents implement with access to repository, database
+      and APIs, humans review and test, confirmation gate before anything
+      irreversible. Consumption tracked per project and role. Quality gates instead
+      of trust: contracts, hermetic offline tests, ADRs as the team's memory.
 
   - title: "Three SaaS products to paying customers"
     period: 2025 – 2026 · founder & lead
@@ -147,16 +140,11 @@ projects:
     period: 2024 – present · founder, architect & lead
     tech: Next.js/TypeScript · Python/FastAPI microservices · PostgreSQL/pgvector · graph DB · GPU worker · Docker · Kubernetes/Terraform · AGPL-3.0 + commercial licence
     summary: >-
-      Bind language models to a verifiable knowledge store: auditable, cloud or
-      fully on-premise and air-gapped. Built from zero as an MVP; in 2026 the
-      monolith was replaced by a service platform with dedicated identity and
-      billing services. Open core — a tenant is configuration, extensions arrive
-      as plugins through a contract and registry, while the invariants
-      (grounding, tenant isolation, mandatory provenance, confirmation gate)
-      stay in the core. Domain agents with agent-to-agent delegation, read-only
-      by default, served over MCP. Single-command deployment on customer
-      hardware with local GPU inference.
-
+      Language models bound to a verifiable knowledge store: auditable, cloud or
+      fully on-premise. Built from zero; in 2026 the monolith became a service
+      platform with its own identity and billing. Open core — a tenant is
+      configuration, while grounding, tenant isolation, provenance and the
+      confirmation gate stay in the core.
   - title: "Breast-cancer early detection — native mobile and web"
     period: 2023 – 2025 · head of operations / venture lead
     tech: Native iOS/Android · web · MongoDB · AI companion · ultrasound analysis (BI-RADS)

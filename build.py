@@ -27,8 +27,10 @@ CSS = """
 body{margin:0;background:#eceef2;color:var(--ink);
   font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
   -webkit-font-smoothing:antialiased}
-.page{max-width:54rem;margin:2.5rem auto;background:var(--bg);border:1px solid var(--line);
-  display:grid;grid-template-columns:15.5rem 1fr}
+.sheet{width:210mm;min-height:297mm;margin:2.5rem auto;background:var(--bg);
+  border:1px solid var(--line);display:grid;grid-template-columns:62mm 1fr;
+  grid-template-rows:1fr auto}
+.sheet + .sheet{margin-top:1.5rem}
 .side{background:var(--side);padding:2rem 1.4rem;border-right:1px solid var(--line);
   -webkit-print-color-adjust:exact;print-color-adjust:exact}
 .main{padding:2.2rem 2.4rem}
@@ -42,7 +44,7 @@ body{margin:0;background:#eceef2;color:var(--ink);
 .contact a{color:var(--muted);text-decoration:none}
 .contact a:hover{color:var(--accent)}
 
-h2{margin:1.7rem 0 .7rem;font-size:.82rem;font-weight:700;letter-spacing:.09em;
+h2{margin:1.4rem 0 .6rem;font-size:.82rem;font-weight:700;letter-spacing:.09em;
   text-transform:uppercase;color:var(--accent)}
 .side h2:first-of-type{margin-top:0}
 h3{margin:.95rem 0 .3rem;font-size:.7rem;font-weight:700;letter-spacing:.07em;
@@ -59,7 +61,7 @@ h1{margin:0;font-size:2.25rem;line-height:1.08;letter-spacing:-.02em;
 .kpi .fig{font-size:1.05rem;font-weight:700;color:var(--accent)}
 .kpi .lab{font-size:.74rem;color:var(--muted);line-height:1.3}
 
-.role{margin:0 0 1.25rem;page-break-inside:avoid}
+.role{margin:0 0 1.02rem;page-break-inside:avoid}
 .role:last-child{margin-bottom:0}
 .role-head{display:flex;justify-content:space-between;gap:1.2rem;align-items:baseline}
 .role-title{font-weight:700;font-size:.9rem;letter-spacing:.02em;
@@ -69,21 +71,22 @@ h1{margin:0;font-size:2.25rem;line-height:1.08;letter-spacing:-.02em;
 .role-loc{color:var(--muted);font-size:.78rem;margin-top:.08rem}
 .role-sum{margin:.38rem 0 0;font-size:.86rem;color:#343842}
 .main ul{margin:.4rem 0 0;padding-left:1.05rem}
-.main li{margin:.22rem 0;font-size:.85rem;color:#343842}
+.main li{margin:.17rem 0;font-size:.845rem;color:#343842}
 
-.proj{margin:0 0 .95rem;page-break-inside:avoid}
+.proj{margin:0 0 .8rem;page-break-inside:avoid}
 .proj-title{font-weight:650;font-size:.88rem}
 .proj-period,.proj-tech{color:var(--muted);font-size:.76rem;margin-top:.08rem}
 .proj-tech{color:var(--accent)}
 .proj-sum{margin:.3rem 0 0;font-size:.84rem;color:#343842}
 .note{font-size:.84rem;color:#343842;margin:0}
 .inline-note{color:var(--muted);font-weight:400;font-size:.8rem;text-transform:none}
-footer{grid-column:1/-1;padding:.9rem 2.4rem;border-top:1px solid var(--line);
+footer{grid-column:1/-1;padding:.7rem 14mm;border-top:1px solid var(--line);
   color:var(--muted);font-size:.73rem;display:flex;justify-content:space-between;gap:1rem}
 footer a{color:var(--muted)}
 
 @media(max-width:720px){
-  .page{grid-template-columns:1fr;margin:0;border:0}
+  .sheet{width:auto;min-height:0;grid-template-columns:1fr;margin:0;border:0}
+  .sheet + .sheet{margin-top:0;border-top:1px solid var(--line)}
   .side{border-right:0;border-bottom:1px solid var(--line)}
   .main{padding:1.6rem 1.25rem}
   .kpis{grid-template-columns:repeat(2,1fr)}
@@ -91,11 +94,23 @@ footer a{color:var(--muted)}
   footer{padding:.9rem 1.25rem;flex-direction:column;gap:.3rem}
 }
 @media print{
-  body{background:#fff}
-  .page{margin:0;max-width:none;border:0}
+  /* The page is 210 mm wide, not a browser window. Everything is sized in rem
+     off the root, so one declaration scales the whole document down to a size
+     that reads properly on paper. */
+  html{font-size:12px}
+  body{background:#fff;font-size:12px}
+  /* One sheet per page, and the second one starts a page rather than
+     continuing the first. A grid column does not repeat its background
+     across a page break, which is why each sheet carries its own sidebar. */
+  .sheet{width:auto;min-height:0;height:auto;margin:0;border:0;grid-template-columns:54mm 1fr;
+    break-inside:avoid;page-break-inside:avoid}
+  .sheet + .sheet{break-before:page;page-break-before:always;margin-top:0}
+  .role,.proj{break-inside:avoid;page-break-inside:avoid}
+  h2,h3{break-after:avoid;page-break-after:avoid}
   a{text-decoration:none;color:inherit}
   @page{size:A4;margin:0}
-  .side{padding:14mm 8mm}.main{padding:14mm 12mm}
+  .side{padding:11mm 6mm}.main{padding:11mm 10mm}
+  .avatar{width:82px;height:82px;margin-bottom:1rem}
 }
 """
 
@@ -173,12 +188,25 @@ def render(cv):
     contact += [f'<li>{ICONS["link"]}<a href="{e(l["url"])}">{e(l["label"])}</a></li>'
                 for l in p["links"]]
 
-    # The sidebar carries skills and languages, the way the template does.
-    # Group headings become the salmon sub-headings; items become bullets.
-    side_skills = "".join(
-        f'<h3>{e(s["group"])}</h3><ul>'
-        + "".join(f"<li>{e(i)}</li>" for i in s["items"]) + "</ul>"
-        for s in cv["skills"])
+    def skill_block(groups):
+        return "".join(f'<h3>{e(g["group"])}</h3><ul>'
+                       + "".join(f"<li>{e(i)}</li>" for i in g["items"]) + "</ul>"
+                       for g in groups)
+
+    # Three projects on the page, the rest on GitHub. Seven of them at
+    # paragraph length was a third sheet, and a CV that runs to three pages is
+    # read as far as the second.
+    FEATURED = ("Knowledge-graph decision intelligence",
+                "AI-enabled engineering operating model")
+    shown = [x for frag in FEATURED
+             for x in cv["projects"] if x["title"].startswith(frag)]
+
+    # Where the split falls. Two roles and the profile fill the first sheet;
+    # everything else follows on the second. Both sheets carry a sidebar,
+    # because a grid column's background stops at the page break.
+    foot = ('<footer><span>Generated from <code>cv.yaml</code>. Clients are described '
+            'rather than named.</span>'
+            '<span><a href="https://github.com/adminleo/cv">source</a></span></footer>')
 
     return f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
@@ -186,41 +214,47 @@ def render(cv):
 <title>{e(p['name'])} — CV</title>
 <meta name="description" content="{e(p['headline'])}">
 <style>{CSS}</style></head>
-<body><main class="page">
+<body>
 
-<aside class="side">
-  {photo()}
-  <ul class="contact">{''.join(contact)}</ul>
-  <h2>Skills</h2>
-  {side_skills}
-  <h2>Languages</h2>
-  <ul>{langs}</ul>
-</aside>
+<main class="sheet">
+  <aside class="side">
+    {photo()}
+    <ul class="contact">{''.join(contact)}</ul>
+    <h2>Skills</h2>
+    {skill_block(cv['skills'][:2])}
+  </aside>
+  <section class="main">
+    <h1>{e(p['name'])}</h1>
+    <p class="headline">{e(p['headline'])}</p>
+    <p class="summary">{e(cv['summary'])}</p>
+    <div class="kpis">{kpis}</div>
+    <h2>Experience</h2>
+    {''.join(role(r) for r in cv['experience'][:2])}
+  </section>
+</main>
 
-<section class="main">
-  <h1>{e(p['name'])}</h1>
-  <p class="headline">{e(p['headline'])}</p>
-  <p class="summary">{e(cv['summary'])}</p>
-  <div class="kpis">{kpis}</div>
+<main class="sheet">
+  <aside class="side">
+    <h2>Skills</h2>
+    {skill_block(cv['skills'][2:])}
+    <h2>Languages</h2>
+    <ul>{langs}</ul>
+  </aside>
+  <section class="main">
+    <h2>Experience</h2>
+    {''.join(role(r) for r in cv['experience'][2:])}
+    <h2>Education</h2>
+    {''.join(edu(x) for x in cv['education'])}
+    <h2>Selected projects</h2>
+    {''.join(project(x) for x in shown)}
+    <p class="note">The rest, with code and findings: <a href="https://github.com/adminleo">github.com/adminleo</a></p>
+    <h2>Research &amp; memberships</h2>
+    <p class="note">{e(cv['research'])}</p>
+  </section>
+  {foot}
+</main>
 
-  <h2>Experience</h2>
-  {''.join(role(r) for r in cv['experience'])}
-
-  <h2>Education</h2>
-  {''.join(edu(x) for x in cv['education'])}
-
-  <h2>Selected projects</h2>
-  {''.join(project(x) for x in cv['projects'])}
-
-  <h2>Research &amp; memberships</h2>
-  <p class="note">{e(cv['research'])}</p>
-</section>
-
-<footer>
-  <span>Generated from <code>cv.yaml</code>. Clients are described rather than named.</span>
-  <span><a href="https://github.com/adminleo/cv">source</a></span>
-</footer>
-</main></body></html>
+</body></html>
 """
 
 
