@@ -21,62 +21,81 @@ except ImportError:
     sys.exit("needs PyYAML:  pip install pyyaml")
 
 CSS = """
-:root{--ink:#17181c;--muted:#5d6370;--line:#e3e5ea;--accent:#2d3b8f;--bg:#fff}
+:root{--ink:#1c1d22;--muted:#5d6370;--line:#e3e5ea;--accent:#6C5CE7;--accent2:#F2545B;
+  --side:#f7f7fb;--bg:#fff}
 *{box-sizing:border-box}
-body{margin:0;background:#f4f5f7;color:var(--ink);
-  font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+body{margin:0;background:#eceef2;color:var(--ink);
+  font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
   -webkit-font-smoothing:antialiased}
-.page{max-width:48rem;margin:2.5rem auto;padding:3rem 3.25rem;background:var(--bg);
-  border:1px solid var(--line);border-radius:4px}
-header{display:flex;align-items:center;gap:1.15rem}.who{min-width:0}.avatar{width:88px;height:88px;border-radius:50%;flex:0 0 auto;object-fit:cover;background:var(--card,#f4f5f8)}@media print{.avatar{width:72px;height:72px}}h1{margin:0;font-size:1.85rem;letter-spacing:-.02em;font-weight:650}
-.headline{margin:.35rem 0 0;color:var(--accent);font-weight:550;font-size:1.02rem}
-.contact{margin:.55rem 0 0;color:var(--muted);font-size:.9rem}
-.contact a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line)}
+.page{max-width:54rem;margin:2.5rem auto;background:var(--bg);border:1px solid var(--line);
+  display:grid;grid-template-columns:15.5rem 1fr}
+.side{background:var(--side);padding:2rem 1.4rem;border-right:1px solid var(--line);
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+.main{padding:2.2rem 2.4rem}
+
+.avatar{width:104px;height:104px;border-radius:50%;object-fit:cover;display:block;
+  margin:0 auto 1.4rem;background:#edeef3}
+.contact{list-style:none;margin:0 0 1.9rem;padding:0}
+.contact li{display:flex;gap:.5rem;align-items:flex-start;margin:.42rem 0;
+  font-size:.8rem;color:var(--muted);word-break:break-word}
+.contact svg{width:13px;height:13px;flex:0 0 auto;margin-top:.17rem;color:var(--accent)}
+.contact a{color:var(--muted);text-decoration:none}
 .contact a:hover{color:var(--accent)}
-h2{margin:2.4rem 0 .9rem;font-size:.76rem;font-weight:650;letter-spacing:.11em;
-  text-transform:uppercase;color:var(--muted);padding-bottom:.4rem;border-bottom:1px solid var(--line)}
-.summary{margin:1.4rem 0 0;font-size:1rem;color:#2b2f38}
-.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem 1.25rem;margin:1.6rem 0 0}
-.kpi .fig{font-size:1.2rem;font-weight:650;color:var(--accent);letter-spacing:-.01em}
-.kpi .lab{font-size:.8rem;color:var(--muted);line-height:1.35}
-.role{margin:0 0 1.65rem;page-break-inside:avoid}
+
+h2{margin:1.7rem 0 .7rem;font-size:.82rem;font-weight:700;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--accent)}
+.side h2:first-of-type{margin-top:0}
+h3{margin:.95rem 0 .3rem;font-size:.7rem;font-weight:700;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--accent2)}
+.side ul{margin:0;padding-left:1rem}
+.side li{font-size:.79rem;color:#3c414c;margin:.16rem 0}
+
+h1{margin:0;font-size:2.25rem;line-height:1.08;letter-spacing:-.02em;
+  font-weight:750;color:var(--accent)}
+.headline{margin:.3rem 0 .9rem;color:var(--accent2);font-weight:700;font-size:.95rem;
+  letter-spacing:.02em}
+.summary{margin:0;font-size:.92rem;color:#343842}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem 1rem;margin:1.2rem 0 0}
+.kpi .fig{font-size:1.05rem;font-weight:700;color:var(--accent)}
+.kpi .lab{font-size:.74rem;color:var(--muted);line-height:1.3}
+
+.role{margin:0 0 1.25rem;page-break-inside:avoid}
 .role:last-child{margin-bottom:0}
-.role-head{display:flex;justify-content:space-between;gap:1.5rem;align-items:baseline}
-.role-title{font-weight:620;font-size:1.02rem}
-.role-period{color:var(--muted);font-size:.84rem;white-space:nowrap}
-.role-meta{color:var(--accent);font-size:.92rem;font-weight:500;margin-top:.1rem}
-.role-loc{color:var(--muted);font-size:.82rem;margin-top:.1rem}
-.role-sum{margin:.5rem 0 0;font-size:.94rem;color:#343842}
-ul{margin:.55rem 0 0;padding-left:1.1rem}
-li{margin:.3rem 0;font-size:.92rem;color:#343842}
-.skill{margin:0 0 .95rem}
-.skill-name{font-weight:600;font-size:.88rem;margin-bottom:.3rem}
-.chips{display:flex;flex-wrap:wrap;gap:.3rem}
-.chip{font-size:.79rem;color:#3c414c;background:#f3f4f7;border:1px solid var(--line);
-  border-radius:3px;padding:.14rem .45rem}
-.proj{margin:0 0 1.3rem;page-break-inside:avoid}
-.proj-title{font-weight:600;font-size:.97rem}
-.proj-period{color:var(--muted);font-size:.82rem;margin-top:.1rem}
-.proj-tech{color:var(--accent);font-size:.8rem;margin-top:.22rem}
-.proj-sum{margin:.4rem 0 0;font-size:.91rem;color:#343842}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
-.note{font-size:.91rem;color:#343842;margin:0}
-.inline-note{color:var(--muted);font-weight:400;font-size:.85rem}
-footer{margin:2.5rem 0 0;padding-top:1rem;border-top:1px solid var(--line);
-  color:var(--muted);font-size:.78rem;display:flex;justify-content:space-between;gap:1rem}
+.role-head{display:flex;justify-content:space-between;gap:1.2rem;align-items:baseline}
+.role-title{font-weight:700;font-size:.9rem;letter-spacing:.02em;
+  text-transform:uppercase;color:var(--accent2)}
+.role-period{color:var(--muted);font-size:.78rem;white-space:nowrap}
+.role-meta{font-size:.86rem;font-weight:600;margin-top:.12rem}
+.role-loc{color:var(--muted);font-size:.78rem;margin-top:.08rem}
+.role-sum{margin:.38rem 0 0;font-size:.86rem;color:#343842}
+.main ul{margin:.4rem 0 0;padding-left:1.05rem}
+.main li{margin:.22rem 0;font-size:.85rem;color:#343842}
+
+.proj{margin:0 0 .95rem;page-break-inside:avoid}
+.proj-title{font-weight:650;font-size:.88rem}
+.proj-period,.proj-tech{color:var(--muted);font-size:.76rem;margin-top:.08rem}
+.proj-tech{color:var(--accent)}
+.proj-sum{margin:.3rem 0 0;font-size:.84rem;color:#343842}
+.note{font-size:.84rem;color:#343842;margin:0}
+.inline-note{color:var(--muted);font-weight:400;font-size:.8rem;text-transform:none}
+footer{grid-column:1/-1;padding:.9rem 2.4rem;border-top:1px solid var(--line);
+  color:var(--muted);font-size:.73rem;display:flex;justify-content:space-between;gap:1rem}
 footer a{color:var(--muted)}
-@media(max-width:640px){
-  .page{margin:0;padding:1.75rem 1.25rem;border:0;border-radius:0}
-  .kpis,.two{grid-template-columns:1fr 1fr}
-  .role-head{flex-direction:column;gap:.1rem}
-  .role-period{white-space:normal}
+
+@media(max-width:720px){
+  .page{grid-template-columns:1fr;margin:0;border:0}
+  .side{border-right:0;border-bottom:1px solid var(--line)}
+  .main{padding:1.6rem 1.25rem}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .role-head{flex-direction:column;gap:.05rem}
+  footer{padding:.9rem 1.25rem;flex-direction:column;gap:.3rem}
 }
 @media print{
   body{background:#fff}
-  .page{margin:0;max-width:none;padding:0;border:0}
-  h2{margin-top:1.5rem}
+  .page{margin:0;max-width:none;border:0}
   a{text-decoration:none;color:inherit}
-  @page{size:A4;margin:14mm 15mm}
+  @page{size:A4;margin:0}
+  .side{padding:14mm 8mm}.main{padding:14mm 12mm}
 }
 """
 
@@ -98,6 +117,12 @@ def photo() -> str:
     data = base64.b64encode(f.read_bytes()).decode()
     return (f'<img class="avatar" alt="" src="data:image/png;base64,{data}">')
 
+
+ICONS = dict(
+    pin='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
+    mail='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-9 5.7a2 2 0 0 1-2 0L2 7"/></svg>',
+    link='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>',
+)
 
 def e(x):
     return html.escape(str(x), quote=False)
@@ -143,6 +168,18 @@ def render(cv):
         + "</div></div>" for s in cv["skills"])
     langs = "".join(f'<li>{e(l["name"])} — {e(l["level"])}</li>' for l in cv["languages"])
 
+    contact = [f'<li>{ICONS["pin"]}<span>{e(p["location"])}</span></li>',
+               f'<li>{ICONS["mail"]}<a href="mailto:{e(p["email"])}">{e(p["email"])}</a></li>']
+    contact += [f'<li>{ICONS["link"]}<a href="{e(l["url"])}">{e(l["label"])}</a></li>'
+                for l in p["links"]]
+
+    # The sidebar carries skills and languages, the way the template does.
+    # Group headings become the salmon sub-headings; items become bullets.
+    side_skills = "".join(
+        f'<h3>{e(s["group"])}</h3><ul>'
+        + "".join(f"<li>{e(i)}</li>" for i in s["items"]) + "</ul>"
+        for s in cv["skills"])
+
     return f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -150,33 +187,34 @@ def render(cv):
 <meta name="description" content="{e(p['headline'])}">
 <style>{CSS}</style></head>
 <body><main class="page">
-<header>
+
+<aside class="side">
   {photo()}
-  <div class="who">
-    <h1>{e(p['name'])}</h1>
-    <p class="headline">{e(p['headline'])}</p>
-    <p class="contact">{e(p['location'])} · <a href="mailto:{e(p['email'])}">{e(p['email'])}</a> · {links}</p>
-  </div>
-</header>
+  <ul class="contact">{''.join(contact)}</ul>
+  <h2>Skills</h2>
+  {side_skills}
+  <h2>Languages</h2>
+  <ul>{langs}</ul>
+</aside>
 
-<p class="summary">{e(cv['summary'])}</p>
-<div class="kpis">{kpis}</div>
+<section class="main">
+  <h1>{e(p['name'])}</h1>
+  <p class="headline">{e(p['headline'])}</p>
+  <p class="summary">{e(cv['summary'])}</p>
+  <div class="kpis">{kpis}</div>
 
-<h2>Experience</h2>
-{''.join(role(r) for r in cv['experience'])}
+  <h2>Experience</h2>
+  {''.join(role(r) for r in cv['experience'])}
 
-<h2>Focus areas</h2>
-{skills}
+  <h2>Education</h2>
+  {''.join(edu(x) for x in cv['education'])}
 
-<h2>Selected projects</h2>
-{''.join(project(x) for x in cv['projects'])}
+  <h2>Selected projects</h2>
+  {''.join(project(x) for x in cv['projects'])}
 
-<h2>Education, languages &amp; research</h2>
-{''.join(edu(x) for x in cv['education'])}
-<div class="two" style="margin-top:1.2rem">
-  <div><div class="skill-name">Languages</div><ul style="padding-left:1rem">{langs}</ul></div>
-  <div><div class="skill-name">Research &amp; memberships</div><p class="note">{e(cv['research'])}</p></div>
-</div>
+  <h2>Research &amp; memberships</h2>
+  <p class="note">{e(cv['research'])}</p>
+</section>
 
 <footer>
   <span>Generated from <code>cv.yaml</code>. Clients are described rather than named.</span>

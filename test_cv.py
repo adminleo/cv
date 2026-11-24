@@ -72,8 +72,8 @@ class PublicCV(unittest.TestCase):
             self.assertTrue(p.get("tech"), p["title"])
 
     def test_page_renders_each_section(self):
-        for heading in ("Experience", "Focus areas", "Selected projects",
-                        "Education, languages"):
+        for heading in ("Experience", "Skills", "Selected projects",
+                        "Education", "Languages", "Research"):
             self.assertIn(heading, self.page)
 
     def test_orcid_is_linked(self):
