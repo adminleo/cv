@@ -21,7 +21,7 @@ except ImportError:
     sys.exit("needs PyYAML:  pip install pyyaml")
 
 CSS = """
-:root{--ink:#1c1d22;--muted:#5d6370;--line:#e3e5ea;--accent:#6C5CE7;--accent2:#F2545B;
+:root{--ink:#1c1d22;--muted:#5d6370;--line:#e3e5ea;--accent:#6C5CE7;--sub:#2c2f38;
   --side:#f7f7fb;--bg:#fff}
 *{box-sizing:border-box}
 body{margin:0;background:#eceef2;color:var(--ink);
@@ -48,14 +48,14 @@ h2{margin:1.4rem 0 .6rem;font-size:.82rem;font-weight:700;letter-spacing:.09em;
   text-transform:uppercase;color:var(--accent)}
 .side h2:first-of-type{margin-top:0}
 h3{margin:.95rem 0 .3rem;font-size:.7rem;font-weight:700;letter-spacing:.07em;
-  text-transform:uppercase;color:var(--accent2)}
+  text-transform:uppercase;color:var(--sub)}
 .side ul{margin:0;padding-left:1rem}
 .side li{font-size:.79rem;color:#3c414c;margin:.16rem 0}
 
 h1{margin:0;font-size:2.25rem;line-height:1.08;letter-spacing:-.02em;
   font-weight:750;color:var(--accent)}
-.headline{margin:.3rem 0 .9rem;color:var(--accent2);font-weight:700;font-size:.95rem;
-  letter-spacing:.02em}
+.headline{margin:.28rem 0 .9rem;color:var(--muted);font-weight:600;font-size:.95rem;
+  letter-spacing:.01em}
 .summary{margin:0;font-size:.92rem;color:#343842}
 .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem 1rem;margin:1.2rem 0 0}
 .kpi .fig{font-size:1.05rem;font-weight:700;color:var(--accent)}
@@ -65,7 +65,7 @@ h1{margin:0;font-size:2.25rem;line-height:1.08;letter-spacing:-.02em;
 .role:last-child{margin-bottom:0}
 .role-head{display:flex;justify-content:space-between;gap:1.2rem;align-items:baseline}
 .role-title{font-weight:700;font-size:.9rem;letter-spacing:.02em;
-  text-transform:uppercase;color:var(--accent2)}
+  text-transform:uppercase;color:var(--sub)}
 .role-period{color:var(--muted);font-size:.78rem;white-space:nowrap}
 .role-meta{font-size:.86rem;font-weight:600;margin-top:.12rem}
 .role-loc{color:var(--muted);font-size:.78rem;margin-top:.08rem}
