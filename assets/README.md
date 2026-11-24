@@ -3,6 +3,7 @@
 | File | What it is | Where it came from |
 |---|---|---|
 | `ui.woff2` | Inter Variable, latin subset, weights 300–800 in one file | [@fontsource-variable/inter](https://www.npmjs.com/package/@fontsource-variable/inter) 5.1.0 · SIL Open Font License 1.1 |
+| `qr-cv.txt` | the live CV's address as a QR matrix, rows of 0 and 1 | `tools/build_qr.py`, error correction M |
 | `world-path.txt` | the world map outline as a single SVG path, plate carrée, whole degrees | Natural Earth 1:110 m land (public domain), reduced by `tools/build_map.py` |
 
 Both are embedded into `cv.html` at build time, because the page is one file:

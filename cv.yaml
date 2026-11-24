@@ -116,14 +116,26 @@ experience:
     summary: Consulting on architecture, technology and organisational transformation; modernisation of technology stacks.
 
 skills:
+  # Chip-sized on purpose: the sidebar is 54 mm wide, and a chip that fills the
+  # whole line is a bullet wearing a grey background. Short enough that two or
+  # three sit side by side, which is what makes the group read as a field of
+  # competence rather than a ranked list.
   - group: Technical product ownership & delivery
-    items: [Requirements analysis & prioritisation, Backlog refinement, Sprint planning & reviews, Business–engineering interface, Architecture decisions · ADRs, Scrum / Kanban, Team leadership via OKRs / KPIs, Funded and consortium projects, Nearshore/offshore delivery]
+    items: [Requirements, Prioritisation, Backlog refinement, Sprint planning, Reviews,
+            Business–engineering interface, Architecture decisions, ADRs, Scrum / Kanban,
+            OKRs & KPIs, Funded projects, Consortium work, Nearshore delivery]
   - group: AI in the SDLC & agents
-    items: [Agentic coding · "vibe coding", Anthropic / OpenAI / Gemini APIs, Ollama on-premise inference, MCP, Knowledge graphs · GraphRAG, Model routing & cost control, Confirmation gates & provenance, Evals & offline test gates, Developer enablement]
+    items: [Agentic coding, "\"Vibe coding\"", Anthropic, OpenAI, Gemini, Ollama on-premise,
+            MCP, Knowledge graphs, GraphRAG, Model routing, Cost control,
+            Confirmation gates, Provenance, Evals, Offline test gates, Developer enablement]
   - group: Tech, cloud & data
-    items: [Python · TypeScript, FastAPI · Next.js, Java / Spring Boot (advisory), Microservices · REST / OpenAPI, Docker · Kubernetes, CI/CD · DevOps, AWS / Azure / GCP, On-premise / air-gapped, PostgreSQL / pgvector · MongoDB · graph DB, Monitoring & observability]
+    items: [Python, TypeScript, FastAPI, Next.js, Java / Spring (advisory), Microservices,
+            REST / OpenAPI, Docker, Kubernetes, CI/CD, DevOps, AWS, Azure, GCP,
+            On-premise, Air-gapped, PostgreSQL, pgvector, MongoDB, Graph DB, Observability]
   - group: Regulated environments & compliance
-    items: [German savings banks group, Listed finance and healthcare groups (C-level), Public sector & consulting partners, On-premise PoC with a city administration, Deutschland-Stack / FITKO, EU-sovereign AI, EU AI Act · GDPR, Information security, BSI baseline protection (basics)]
+    items: [Savings banks group, Listed groups (C-level), Public sector,
+            City administration PoC, Deutschland-Stack, FITKO, EU-sovereign AI,
+            EU AI Act, GDPR, Information security, BSI baseline protection]
 
 projects:
   - title: "Neurosymbolic reasoning layer — propose neurally, verify symbolically"
