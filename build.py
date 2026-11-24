@@ -79,6 +79,12 @@ h1{margin:0;font-size:2.25rem;line-height:1.08;letter-spacing:-.02em;
 .proj-tech{color:var(--accent)}
 .proj-sum{margin:.3rem 0 0;font-size:.84rem;color:#343842}
 .note{font-size:.84rem;color:#343842;margin:0}
+.marks{display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap;margin:.5rem 0 0}
+.mark{display:block;width:auto;object-fit:contain}
+.marks .txt{font-size:.78rem;color:var(--muted);font-weight:600}
+.pub{margin:0 0 .45rem}
+.pub-t{font-size:.85rem;font-weight:650}
+.pub-m{font-size:.76rem;color:var(--muted)}
 .inline-note{color:var(--muted);font-weight:400;font-size:.8rem;text-transform:none}
 footer{grid-column:1/-1;padding:.7rem 14mm;border-top:1px solid var(--line);
   color:var(--muted);font-size:.73rem;display:flex;justify-content:space-between;gap:1rem}
@@ -102,8 +108,14 @@ footer a{color:var(--muted)}
   /* One sheet per page, and the second one starts a page rather than
      continuing the first. A grid column does not repeat its background
      across a page break, which is why each sheet carries its own sidebar. */
-  .sheet{width:auto;min-height:0;height:auto;margin:0;border:0;grid-template-columns:54mm 1fr;
+  /* Exactly one page tall, so the sidebar's grey reaches the bottom edge
+     instead of stopping where the text happens to end. A hair under 297 mm:
+     a box that measures the full page height rounds up on some printers and
+     pushes out a blank sheet. */
+  .sheet{width:auto;height:296.4mm;min-height:296.4mm;margin:0;border:0;
+    grid-template-columns:54mm 1fr;overflow:hidden;
     break-inside:avoid;page-break-inside:avoid}
+  .side,.main{min-height:100%}
   .sheet + .sheet{break-before:page;page-break-before:always;margin-top:0}
   .role,.proj{break-inside:avoid;page-break-inside:avoid}
   h2,h3{break-after:avoid;page-break-after:avoid}
@@ -138,6 +150,20 @@ ICONS = dict(
     mail='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-9 5.7a2 2 0 0 1-2 0L2 7"/></svg>',
     link='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>',
 )
+
+def logo(name: str, alt: str, h: int = 30) -> str:
+    """A membership mark, embedded like the portrait.
+
+    Same reason: the page is one file, and an image fetched from a server is
+    one deploy away from a hole in a recruiter's PDF.
+    """
+    f = HERE / "logos" / f"{name}.png"
+    if not f.exists():
+        return ""
+    data = base64.b64encode(f.read_bytes()).decode()
+    return (f'<img class="mark" style="height:{h}px" alt="{e(alt)}" '
+            f'src="data:image/png;base64,{data}">')
+
 
 def e(x):
     return html.escape(str(x), quote=False)
@@ -204,6 +230,19 @@ def render(cv):
     # Where the split falls. Two roles and the profile fill the first sheet;
     # everything else follows on the second. Both sheets carry a sidebar,
     # because a grid column's background stops at the page break.
+    # Two entries with DOIs. A publication a reader can resolve is worth more
+    # than a line claiming research, which is why the prose paragraph that used
+    # to sit here is gone.
+    publications = "".join(
+        f'<div class="pub"><div class="pub-t">{e(x["title"])}</div>'
+        f'<div class="pub-m">{e(x["note"])} · DOI '
+        f'<a href="https://doi.org/{e(x["doi"])}">{e(x["doi"])}</a></div></div>'
+        for x in cv.get("publications", []))
+
+    # KI Park has no logo file here yet; the name carries it until one arrives.
+    ki_park = (logo("ki-park", "KI Park e.V.", 22)
+               or '<span class="txt">KI Park e.V.</span>')
+
     foot = ('<footer><span>Generated from <code>cv.yaml</code>. Clients are described '
             'rather than named.</span>'
             '<span><a href="https://github.com/adminleo/cv">source</a></span></footer>')
@@ -248,8 +287,17 @@ def render(cv):
     <h2>Selected projects</h2>
     {''.join(project(x) for x in shown)}
     <p class="note">The rest, with code and findings: <a href="https://github.com/adminleo">github.com/adminleo</a></p>
-    <h2>Research &amp; memberships</h2>
-    <p class="note">{e(cv['research'])}</p>
+
+    <h2>Publications</h2>
+    {publications}
+
+    <h2>Funded, certified, member of</h2>
+    <div class="marks">
+      {logo('bmftr', 'German Federal Ministry of Research, Technology and Space', 34)}
+      {logo('bsfz-siegel', 'BSFZ — research allowance certified 2026', 34)}
+      {logo('ki-bundesverband', 'German AI Association', 22)}
+      {ki_park}
+    </div>
   </section>
   {foot}
 </main>
