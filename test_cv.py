@@ -26,10 +26,21 @@ CLIENTS = ["Fresenius", "Aareal", "Börse Stuttgart", "Kassel", "ADAC",
 # deliberately; a postal address and a phone number are not.
 PRIVATE_HINTS = ["+49", "Straße", "Strasse", "str.", "@gmail"]
 
+# The portrait and the logos are embedded as base64, and base64 is an alphabet
+# of letters, digits, "+" and "/" — so a long enough blob contains "+49", and
+# "ING" too, purely by chance. It did: the logo strip broke this file's own
+# phone-number check on its first push. The denylists are about prose, so they
+# read the page with the embedded bytes taken out.
+DATA_URI = re.compile(r"data:[a-z/+-]+;base64,[A-Za-z0-9+/=]+")
+
+
+def prose(page: str) -> str:
+    return DATA_URI.sub("", page)
+
 
 class PublicCV(unittest.TestCase):
     def setUp(self):
-        self.page = build.render(CV)
+        self.page = prose(build.render(CV))
 
     def test_no_client_is_named(self):
         # word boundaries, or a short acronym like ING matches "banking"
@@ -84,6 +95,7 @@ class TestThePortrait(unittest.TestCase):
     """The page is one file. The photo has to travel inside it."""
 
     def setUp(self):
+        # The one class that wants the embedded bytes left in.
         self.page = build.render(CV)
 
     def test_the_photo_is_embedded_not_linked(self):
