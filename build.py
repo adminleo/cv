@@ -10,6 +10,7 @@ produces the PDF — there is no separate PDF toolchain to keep alive.
 from __future__ import annotations
 
 import argparse
+import base64
 import html
 import pathlib
 import sys
@@ -27,7 +28,7 @@ body{margin:0;background:#f4f5f7;color:var(--ink);
   -webkit-font-smoothing:antialiased}
 .page{max-width:48rem;margin:2.5rem auto;padding:3rem 3.25rem;background:var(--bg);
   border:1px solid var(--line);border-radius:4px}
-h1{margin:0;font-size:1.85rem;letter-spacing:-.02em;font-weight:650}
+header{display:flex;align-items:center;gap:1.15rem}.who{min-width:0}.avatar{width:88px;height:88px;border-radius:50%;flex:0 0 auto;object-fit:cover;background:var(--card,#f4f5f8)}@media print{.avatar{width:72px;height:72px}}h1{margin:0;font-size:1.85rem;letter-spacing:-.02em;font-weight:650}
 .headline{margin:.35rem 0 0;color:var(--accent);font-weight:550;font-size:1.02rem}
 .contact{margin:.55rem 0 0;color:var(--muted);font-size:.9rem}
 .contact a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line)}
@@ -78,6 +79,24 @@ footer a{color:var(--muted)}
   @page{size:A4;margin:14mm 15mm}
 }
 """
+
+
+HERE = pathlib.Path(__file__).resolve().parent
+
+
+def photo() -> str:
+    """The portrait, embedded rather than linked.
+
+    A CV that fetches its own photo from somewhere else is one deploy away from
+    showing a broken image to a recruiter, and the page is built to be a single
+    self-contained file. So it travels inside the HTML or not at all: if
+    photo.png is missing the header simply renders without it.
+    """
+    f = HERE / "photo.png"
+    if not f.exists():
+        return ""
+    data = base64.b64encode(f.read_bytes()).decode()
+    return (f'<img class="avatar" alt="" src="data:image/png;base64,{data}">')
 
 
 def e(x):
@@ -132,9 +151,12 @@ def render(cv):
 <style>{CSS}</style></head>
 <body><main class="page">
 <header>
-  <h1>{e(p['name'])}</h1>
-  <p class="headline">{e(p['headline'])}</p>
-  <p class="contact">{e(p['location'])} · <a href="mailto:{e(p['email'])}">{e(p['email'])}</a> · {links}</p>
+  {photo()}
+  <div class="who">
+    <h1>{e(p['name'])}</h1>
+    <p class="headline">{e(p['headline'])}</p>
+    <p class="contact">{e(p['location'])} · <a href="mailto:{e(p['email'])}">{e(p['email'])}</a> · {links}</p>
+  </div>
 </header>
 
 <p class="summary">{e(cv['summary'])}</p>
