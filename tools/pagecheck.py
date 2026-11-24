@@ -81,11 +81,25 @@ def main() -> int:
               return room.reduce((a, b) =>
                 (a.have - a.want) <= (b.have - b.want) ? a : b);
             })""")
+        # One left edge in the sidebar. This broke once because `.side ul`
+        # outranks a bare `.contact`, which is invisible in the markup and
+        # obvious on paper: the links sat a step right of everything else.
+        edges = p.evaluate("""() => {
+            const s = document.querySelector('.sheet .side');
+            const base = s.getBoundingClientRect().left;
+            const at = sel => {
+              const el = s.querySelector(sel);
+              return el ? Math.round(el.getBoundingClientRect().left - base) : null;
+            };
+            return {portrait: at('.avatar'), links: at('.contact svg'),
+                    heading: at('h2'), bar: at('.bar-n'), chip: at('.chip')};
+        }""")
         p.pdf(path=str(pdf), prefer_css_page_size=True, print_background=True)
         browser.close()
 
     pages = len(re.findall(rb"/Type\s*/Page[^s]", pdf.read_bytes()))
 
+    ragged = {k: v for k, v in edges.items() if v is not None and v != edges["heading"]}
     clipped = False
     for i, sh in enumerate(sheets, 1):
         room = sh["have"] - sh["want"]
@@ -96,7 +110,13 @@ def main() -> int:
             state = f"{room} px to spare" + ("" if room >= 40 else "   <- tight")
         print(f"  sheet {i}: content {sh['want']} px in {sh['have']} px — {state}")
 
+    print(f"\n  sidebar left edge: {edges['heading']} px" +
+          ("" if not ragged else f"   <- RAGGED: {ragged}"))
     print(f"\n{pages} page(s) in the PDF, want {WANT_PAGES}")
+    if ragged:
+        print("Something in the sidebar does not start where the headings do.",
+              file=sys.stderr)
+        return 1
     if clipped:
         print("Content is being cut off. The sheet is a fixed height on purpose "
               "so the sidebar reaches the bottom edge; the price is that "

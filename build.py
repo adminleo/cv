@@ -42,7 +42,11 @@ body{margin:0;background:#eceef2;color:var(--ink);
   margin:0 0 1rem;background:#edeef3;
   box-shadow:0 0 0 1.5px rgba(108,92,231,.45);
   -webkit-print-color-adjust:exact;print-color-adjust:exact}
-.contact{list-style:none;margin:0 0 1.5rem;padding:0}
+/* .side ul below sets a bullet indent and outranks a bare .contact,
+   so this one is scoped too — otherwise the links sit a step to the
+   right of the portrait and the headings, which is exactly the
+   second edge the column was supposed to lose. */
+.side .contact{list-style:none;margin:0 0 1.5rem;padding-left:0}
 .contact li{display:flex;gap:.5rem;align-items:flex-start;margin:.42rem 0;
   font-size:.8rem;color:var(--muted);word-break:break-word}
 .contact svg{width:13px;height:13px;flex:0 0 auto;margin-top:.17rem;color:var(--accent)}
