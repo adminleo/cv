@@ -6,8 +6,8 @@
 
 person:
   name: Leonardo Bornhäußer
-  headline: Technical Product Owner · Data-driven engineering · Cloud & AI in regulated environments
-  location: Frankfurt am Main, Germany · remote
+  headline: Technical Product Owner · Hands-on to leadership · Building and scaling AI products in regulated environments
+  location: Berlin · also Frankfurt am Main · remote
   email: leonardo@creativate.tech
   links:
     - { label: LinkedIn, url: "https://www.linkedin.com/in/leonardo-bornhäußer/" }
@@ -15,17 +15,45 @@ person:
     - { label: ORCID,    url: "https://orcid.org/0009-0005-6464-5179" }
 
 summary: >-
-  Technical product owner and the interface between business and engineering:
-  more than ten years in software projects, more than six years of SaaS
-  products, more than four years deep in applied AI. I analyse and prioritise
+  Technical product owner who covers the whole range cleanly — hands-on in the
+  code, the architecture decisions, and the leadership of the teams that ship —
+  with the focus on building innovation and product and then scaling both. More
+  than ten years in software projects, more than six years of SaaS products,
+  more than four years deep in applied AI. I analyse and prioritise
   requirements, guide agile teams through planning, reviews and refinement, and
-  take architecture and technology decisions from microservices and CI/CD to
-  cloud and on-premise; hands-on in Python and TypeScript, Java/Spring Boot at
-  architecture level. I know regulated environments from the inside — the German
-  savings banks group, public administration, and C-level work with listed
-  financial and healthcare groups. As co-founder of a company builder I built
-  and led international, multilingual teams of roughly 100 people. German native
-  speaker, English at C2 level.
+  decide architecture and technology from microservices and CI/CD to cloud and
+  on-premise; hands-on in Python and TypeScript, Java/Spring Boot at
+  architecture level, and working daily in agentic ("vibe") coding. Product
+  decisions are measured rather than believed — the data-driven side of the
+  role. Regulated environments from the inside: the German savings banks group,
+  public administration, and C-level work with listed financial and healthcare
+  groups. As co-founder of a company builder I built and led international,
+  multilingual teams of roughly 100 people.
+
+# Self-assessment, and read as such by anyone who has seen a CV before. They
+# are here because the question the page has to answer first is where I sit
+# between writing the code and leading the people, and a bar answers it in a
+# glance where a paragraph does not.
+strengths:
+  - { name: Product ownership & delivery,     level: 95 }
+  - { name: Team leadership & scaling,        level: 90 }
+  - { name: "Applied AI, agents & LLM orchestration", level: 90 }
+  - { name: "Architecture, cloud & on-premise", level: 85 }
+  - { name: Hands-on engineering · Python/TS, level: 80 }
+  - { name: "Data analysis & experiment design", level: 75 }
+
+# Plate carrée, so a pin is just its longitude and latitude. Regions rather
+# than street addresses: the teams were distributed, and a pin on a capital
+# would claim a precision that was never there.
+map:
+  note: "Teams and delivery I have led: Europe · sub-Saharan Africa · South Asia"
+  pins:
+    # Berlin and Frankfurt are 2.4 degrees apart, which is one pixel at this
+    # size — two pins there make a blob, not a point. One pin, and the contact
+    # line above names both.
+    - { name: "Germany — Berlin & Frankfurt", lat: 52.5, lon: 13.4 }
+    - { name: sub-Saharan Africa, lat: 4.0,  lon: 18.0 }
+    - { name: South Asia,         lat: 29.0, lon: 71.0 }
 
 kpis:
   - { figure: "10+",       label: "years in software projects" }
@@ -39,7 +67,7 @@ experience:
   - title: Technical Product Owner & Founder
     company: Creativate Technologies GmbH
     period: Apr 2024 – present
-    location: Frankfurt am Main · remote · internationally distributed, multilingual team
+    location: Berlin & Frankfurt am Main · remote · internationally distributed, multilingual team
     summary: >-
       Since 10/2026 in full-time further education (data science); this role
       reduced to 5–10 hours a week — available full time. Technical product
@@ -91,7 +119,7 @@ skills:
   - group: Technical product ownership & delivery
     items: [Requirements analysis & prioritisation, Backlog refinement, Sprint planning & reviews, Business–engineering interface, Architecture decisions · ADRs, Scrum / Kanban, Team leadership via OKRs / KPIs, Funded and consortium projects, Nearshore/offshore delivery]
   - group: AI in the SDLC & agents
-    items: [Agentic coding workflows, Anthropic / OpenAI / Gemini APIs, Ollama on-premise inference, MCP, Knowledge graphs · GraphRAG, Model routing & cost control, Confirmation gates & provenance, Evals & offline test gates, Developer enablement]
+    items: [Agentic coding · "vibe coding", Anthropic / OpenAI / Gemini APIs, Ollama on-premise inference, MCP, Knowledge graphs · GraphRAG, Model routing & cost control, Confirmation gates & provenance, Evals & offline test gates, Developer enablement]
   - group: Tech, cloud & data
     items: [Python · TypeScript, FastAPI · Next.js, Java / Spring Boot (advisory), Microservices · REST / OpenAPI, Docker · Kubernetes, CI/CD · DevOps, AWS / Azure / GCP, On-premise / air-gapped, PostgreSQL / pgvector · MongoDB · graph DB, Monitoring & observability]
   - group: Regulated environments & compliance

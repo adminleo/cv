@@ -87,6 +87,19 @@ class PublicCV(unittest.TestCase):
                         "Education", "Languages", "Research"):
             self.assertIn(heading, self.page)
 
+    def test_bar_labels_survived_the_yaml(self):
+        """An unquoted comma inside { } ends the value: "Applied AI, agents &
+        LLM orchestration" parsed as the name "Applied AI" plus a stray key,
+        and the page rendered the short half without complaining."""
+        for b in CV.get("strengths", []):
+            self.assertEqual(set(b), {"name", "level"}, f"stray keys: {b}")
+            self.assertIsInstance(b["level"], int, b)
+
+    def test_every_pin_is_on_the_map(self):
+        for pin in CV.get("map", {}).get("pins", []):
+            self.assertTrue(-180 <= pin["lon"] <= 180, pin)
+            self.assertTrue(-58 <= pin["lat"] <= 84, f"outside the drawn band: {pin}")
+
     def test_orcid_is_linked(self):
         self.assertIn("orcid.org", self.page)
 

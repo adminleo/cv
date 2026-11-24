@@ -31,13 +31,16 @@ body{margin:0;background:#eceef2;color:var(--ink);
   border:1px solid var(--line);display:grid;grid-template-columns:62mm 1fr;
   grid-template-rows:1fr auto}
 .sheet + .sheet{margin-top:1.5rem}
-.side{background:var(--side);padding:2rem 1.4rem;border-right:1px solid var(--line);
+.side{background:var(--side);padding:2rem 1.15rem 2rem 1.05rem;
+  border-right:1px solid var(--line);
   -webkit-print-color-adjust:exact;print-color-adjust:exact}
 .main{padding:2.2rem 2.4rem}
 
-.avatar{width:104px;height:104px;border-radius:50%;object-fit:cover;display:block;
-  margin:0 auto 1.4rem;background:#edeef3}
-.contact{list-style:none;margin:0 0 1.9rem;padding:0}
+/* Left, not centred. A centred portrait over left-aligned contact lines
+   gives the column two edges, and the eye follows the weaker one. */
+.avatar{width:92px;height:92px;border-radius:50%;object-fit:cover;display:block;
+  margin:0 0 1rem;background:#edeef3}
+.contact{list-style:none;margin:0 0 1.5rem;padding:0}
 .contact li{display:flex;gap:.5rem;align-items:flex-start;margin:.42rem 0;
   font-size:.8rem;color:var(--muted);word-break:break-word}
 .contact svg{width:13px;height:13px;flex:0 0 auto;margin-top:.17rem;color:var(--accent)}
@@ -49,8 +52,25 @@ h2{margin:1.4rem 0 .6rem;font-size:.82rem;font-weight:700;letter-spacing:.09em;
 .side h2:first-of-type{margin-top:0}
 h3{margin:.95rem 0 .3rem;font-size:.7rem;font-weight:700;letter-spacing:.07em;
   text-transform:uppercase;color:var(--sub)}
-.side ul{margin:0;padding-left:1rem}
+.side ul{margin:0;padding-left:.85rem}
 .side li{font-size:.79rem;color:#3c414c;margin:.16rem 0}
+
+/* Bars. The figure is never printed — a number invites an argument about
+   whether it should be 85 or 90, which is not the point. The point is the
+   shape of the column: where the weight sits between hands-on and leading. */
+.bar{margin:.4rem 0}
+.bar-n{font-size:.76rem;color:#3c414c;line-height:1.3}
+.bar-t{height:4px;border-radius:2px;background:#dde0ea;margin-top:.22rem;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+.bar-f{height:4px;border-radius:2px;background:var(--accent);
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+.world{display:block;width:100%;height:auto;margin:.1rem 0 .35rem;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+.world .land{fill:#d9dce6}
+.world .halo{fill:var(--accent);opacity:.2}
+.world .pin{fill:var(--accent)}
+.map-note{margin:0;font-size:.73rem;color:var(--muted);line-height:1.35}
 
 h1{margin:0;font-size:2.25rem;line-height:1.08;letter-spacing:-.02em;
   font-weight:750;color:var(--accent)}
@@ -121,7 +141,7 @@ footer a{color:var(--muted)}
   h2,h3{break-after:avoid;page-break-after:avoid}
   a{text-decoration:none;color:inherit}
   @page{size:A4;margin:0}
-  .side{padding:11mm 6mm}.main{padding:11mm 10mm}
+  .side{padding:11mm 5mm 11mm 4.5mm}.main{padding:11mm 10mm}
   .avatar{width:82px;height:82px;margin-bottom:1rem}
 }
 """
@@ -169,6 +189,37 @@ def e(x):
     return html.escape(str(x), quote=False)
 
 
+def bars(items):
+    """A proficiency bar per line. Levels come from cv.yaml and are a
+    self-assessment; see the note there."""
+    return "".join(
+        f'<div class="bar"><div class="bar-n">{e(b["name"])}</div>'
+        f'<div class="bar-t"><div class="bar-f" style="width:{int(b["level"])}%"></div></div>'
+        f'</div>' for b in items)
+
+
+def world(cfg):
+    """A small world map with the pins on it.
+
+    The outline is one committed path (tools/build_map.py), drawn in plate
+    carrée — which is the whole reason for choosing that projection: a pin is
+    its longitude and latitude with one subtraction, no projection maths at
+    render time and nothing to drift out of step with the map behind it.
+    """
+    f = HERE / "assets" / "world-path.txt"
+    if not f.exists() or not cfg:
+        return ""
+    pins = "".join(
+        f'<circle class="halo" cx="{p["lon"] + 180:.0f}" cy="{84 - p["lat"]:.0f}" r="6"/>'
+        f'<circle class="pin" cx="{p["lon"] + 180:.0f}" cy="{84 - p["lat"]:.0f}" r="3.2">'
+        f'<title>{e(p["name"])}</title></circle>'
+        for p in cfg["pins"])
+    note = f'<p class="map-note">{e(cfg["note"])}</p>' if cfg.get("note") else ""
+    return (f'<svg class="world" viewBox="0 0 360 142" role="img" '
+            f'aria-label="{e(cfg.get("note", "world map"))}">'
+            f'<path class="land" d="{f.read_text().strip()}"/>{pins}</svg>{note}')
+
+
 def role(r):
     out = [f'<div class="role"><div class="role-head">'
            f'<span class="role-title">{e(r["title"])}</span>'
@@ -207,7 +258,11 @@ def render(cv):
         f'<div class="skill"><div class="skill-name">{e(s["group"])}</div><div class="chips">'
         + "".join(f'<span class="chip">{e(i)}</span>' for i in s["items"])
         + "</div></div>" for s in cv["skills"])
-    langs = "".join(f'<li>{e(l["name"])} — {e(l["level"])}</li>' for l in cv["languages"])
+    # A language is the one skill where a bar is not a self-flattering guess:
+    # the levels are the CEFR scale, and native is the top of it.
+    lang_bars = [dict(name=f'{l["name"]} — {l["level"]}',
+                      level=100 if "native" in l["level"].lower() else 95)
+                 for l in cv["languages"]]
 
     contact = [f'<li>{ICONS["pin"]}<span>{e(p["location"])}</span></li>',
                f'<li>{ICONS["mail"]}<a href="mailto:{e(p["email"])}">{e(p["email"])}</a></li>']
@@ -239,8 +294,9 @@ def render(cv):
         f'<a href="https://doi.org/{e(x["doi"])}">{e(x["doi"])}</a></div></div>'
         for x in cv.get("publications", []))
 
-    # KI Park has no logo file here yet; the name carries it until one arrives.
-    ki_park = (logo("ki-park", "KI Park e.V.", 22)
+    # Taller than the others: this mark is a stacked wordmark beside a ring,
+    # so matching its cap height to theirs makes the whole lockup shrink.
+    ki_park = (logo("ki-park", "KI Park e.V.", 27)
                or '<span class="txt">KI Park e.V.</span>')
 
     foot = ('<footer><span>Generated from <code>cv.yaml</code>. Clients are described '
@@ -259,8 +315,12 @@ def render(cv):
   <aside class="side">
     {photo()}
     <ul class="contact">{''.join(contact)}</ul>
+    <h2>Strengths</h2>
+    {bars(cv.get('strengths', []))}
     <h2>Skills</h2>
     {skill_block(cv['skills'][:2])}
+    <h2>Where the work was</h2>
+    {world(cv.get('map'))}
   </aside>
   <section class="main">
     <h1>{e(p['name'])}</h1>
@@ -277,7 +337,7 @@ def render(cv):
     <h2>Skills</h2>
     {skill_block(cv['skills'][2:])}
     <h2>Languages</h2>
-    <ul>{langs}</ul>
+    {bars(lang_bars)}
   </aside>
   <section class="main">
     <h2>Experience</h2>
