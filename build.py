@@ -99,7 +99,7 @@ h1{margin:0;font-size:2.25rem;line-height:1.08;letter-spacing:-.02em;
 .proj-tech{color:var(--accent)}
 .proj-sum{margin:.3rem 0 0;font-size:.84rem;color:#343842}
 .note{font-size:.84rem;color:#343842;margin:0}
-.marks{display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap;margin:.5rem 0 0}
+.marks{display:flex;flex-direction:column;align-items:flex-start;gap:.85rem;margin:.55rem 0 0}
 .mark{display:block;width:auto;object-fit:contain}
 .marks .txt{font-size:.78rem;color:var(--muted);font-weight:600}
 .pub{margin:0 0 .45rem}
@@ -278,7 +278,8 @@ def render(cv):
     # paragraph length was a third sheet, and a CV that runs to three pages is
     # read as far as the second.
     FEATURED = ("Knowledge-graph decision intelligence",
-                "AI-enabled engineering operating model")
+                "AI-enabled engineering operating model",
+                "Neurosymbolic reasoning layer")
     shown = [x for frag in FEATURED
              for x in cv["projects"] if x["title"].startswith(frag)]
 
@@ -296,7 +297,7 @@ def render(cv):
 
     # Taller than the others: this mark is a stacked wordmark beside a ring,
     # so matching its cap height to theirs makes the whole lockup shrink.
-    ki_park = (logo("ki-park", "KI Park e.V.", 27)
+    ki_park = (logo("ki-park", "KI Park e.V.", 29)
                or '<span class="txt">KI Park e.V.</span>')
 
     foot = ('<footer><span>Generated from <code>cv.yaml</code>. Clients are described '
@@ -338,6 +339,13 @@ def render(cv):
     {skill_block(cv['skills'][2:])}
     <h2>Languages</h2>
     {bars(lang_bars)}
+    <h2>Funded, certified, member of</h2>
+    <div class="marks">
+      {logo('bmftr', 'German Federal Ministry of Research, Technology and Space', 38)}
+      {logo('bsfz-siegel', 'BSFZ — research allowance certified 2026', 38)}
+      {logo('ki-bundesverband', 'German AI Association', 21)}
+      {ki_park}
+    </div>
   </aside>
   <section class="main">
     <h2>Experience</h2>
@@ -351,13 +359,6 @@ def render(cv):
     <h2>Publications</h2>
     {publications}
 
-    <h2>Funded, certified, member of</h2>
-    <div class="marks">
-      {logo('bmftr', 'German Federal Ministry of Research, Technology and Space', 34)}
-      {logo('bsfz-siegel', 'BSFZ — research allowance certified 2026', 34)}
-      {logo('ki-bundesverband', 'German AI Association', 22)}
-      {ki_park}
-    </div>
   </section>
   {foot}
 </main>
