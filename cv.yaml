@@ -177,6 +177,14 @@ languages:
   - { name: German,  level: native }
   - { name: English, level: "C2 · fully business-fluent (English-language schooling)" }
 
+publications:
+  - title: grounded-ai-evals — a four-layer method for evaluating AI that answers with evidence
+    note: Library and release gate, Apache-2.0
+    doi: 10.5281/zenodo.24100702
+  - title: Governed graph growth — keeping a continuously ingested knowledge graph trustworthy
+    note: Technical note, CC BY 4.0
+    doi: 10.5281/zenodo.24099664
+
 research: >-
   Applied AI research in an EU consortium with academic and Fraunhofer
   partners, with practice transfer through a public-sector consultancy;

@@ -54,21 +54,48 @@ def main() -> int:
         p.goto(page.as_uri())
         p.emulate_media(media="print")
         p.wait_for_timeout(300)
-        sheets = p.evaluate(
-            "() => [...document.querySelectorAll('.sheet')]"
-            ".map(s => Math.round(s.getBoundingClientRect().height))")
+        # The sheets are a fixed height and clip what does not fit, so the
+        # question is no longer "is the sheet too tall" but "did anything get
+        # cut off". Compare what each column wants against what it got.
+        # scrollHeight lies here: the columns carry min-height:100%, so they
+        # always report at least the sheet height whether or not the content
+        # fits. Measure the bottom of the last child instead.
+        sheets = p.evaluate("""() => [...document.querySelectorAll('.sheet')]
+            .map(s => {
+              const cols = [...s.querySelectorAll('.side,.main')];
+              const want = Math.max(...cols.map(c => {
+                const top = c.getBoundingClientRect().top;
+                const pad = parseFloat(getComputedStyle(c).paddingBottom);
+                const kids = [...c.children];
+                if (!kids.length) return 0;
+                const low = Math.max(...kids.map(k =>
+                  k.getBoundingClientRect().bottom));
+                return Math.round(low - top + pad);
+              }));
+              return {want, have: Math.round(s.getBoundingClientRect().height)};
+            })""")
         p.pdf(path=str(pdf), prefer_css_page_size=True, print_background=True)
         browser.close()
 
     pages = len(re.findall(rb"/Type\s*/Page[^s]", pdf.read_bytes()))
 
-    for i, h in enumerate(sheets, 1):
-        room = PAGE_PX - h
-        state = f"{room} px to spare" if room >= 0 else f"OVER by {-room} px"
-        flag = "" if room >= 40 else "   <- tight"
-        print(f"  sheet {i}: {h} px of {PAGE_PX}  — {state}{flag}")
+    clipped = False
+    for i, sh in enumerate(sheets, 1):
+        room = sh["have"] - sh["want"]
+        if room < 0:
+            clipped = True
+            state = f"CLIPPED — {-room} px did not fit and is invisible"
+        else:
+            state = f"{room} px to spare" + ("" if room >= 40 else "   <- tight")
+        print(f"  sheet {i}: content {sh['want']} px in {sh['have']} px — {state}")
 
     print(f"\n{pages} page(s) in the PDF, want {WANT_PAGES}")
+    if clipped:
+        print("Content is being cut off. The sheet is a fixed height on purpose "
+              "so the sidebar reaches the bottom edge; the price is that "
+              "anything over the line disappears without a trace.",
+              file=sys.stderr)
+        return 1
     if pages != WANT_PAGES:
         print("A CV that runs to three pages is read as far as the second.",
               file=sys.stderr)
