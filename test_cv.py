@@ -80,5 +80,26 @@ class PublicCV(unittest.TestCase):
         self.assertIn("orcid.org", self.page)
 
 
+class TestThePortrait(unittest.TestCase):
+    """The page is one file. The photo has to travel inside it."""
+
+    def setUp(self):
+        self.page = build.render(CV)
+
+    def test_the_photo_is_embedded_not_linked(self):
+        self.assertIn("data:image/png;base64,", self.page)
+
+    def test_no_image_is_fetched_from_elsewhere(self):
+        """A CV that loads its portrait from a server is one deploy away from
+        showing a recruiter a broken image. It has happened to the email
+        signature three times."""
+        for tag in re.findall(r"<img[^>]*>", self.page):
+            self.assertIn("data:image/", tag, f"image fetched remotely: {tag[:80]}")
+
+    def test_the_page_still_builds_without_a_photo(self):
+        self.assertIsInstance(build.photo(), str)
+
+
+
 if __name__ == "__main__":
     unittest.main()
