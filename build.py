@@ -458,7 +458,7 @@ def render(cv):
     <h2>{SECTION["strengths"]}Strengths</h2>
     {bars(cv.get('strengths', []), 'Self-assessment: how much of this I carry myself, not how much I have read about it.')}
     <h2>{SECTION["skills"]}Skills</h2>
-    {skill_block(cv['skills'][:3])}
+    {skill_block(cv['skills'])}
   </aside>
   <section class="main">
     <h1>{e(p['name'])}</h1>
@@ -473,8 +473,6 @@ def render(cv):
 
 <main class="sheet">
   <aside class="side">
-    <h2>{SECTION["skills"]}Skills</h2>
-    {skill_block(cv['skills'][3:])}
     <h2>{SECTION["map"]}Where the work was</h2>
     {world(cv.get('map'))}
     <h2 class="lg">{SECTION["languages"]}Languages</h2>
