@@ -151,7 +151,7 @@ h1{margin:0;font-size:2.25rem;line-height:1.08;letter-spacing:-.02em;
 .note{font-size:.84rem;color:#343842;margin:0}
 .marks{display:flex;flex-direction:column;align-items:flex-start;gap:.85rem;margin:.15rem 0 0}
 .marks.row{flex-direction:row;align-items:center;gap:.7rem;flex-wrap:wrap}
-.mark{display:block;width:auto;object-fit:contain}
+.mark{display:block;width:auto;max-width:100%;object-fit:contain}
 .marks .txt{font-size:.78rem;color:var(--muted);font-weight:600}
 .pub{margin:0 0 .45rem}
 .pub-t{font-size:.85rem;font-weight:650}
@@ -499,7 +499,7 @@ def render(cv):
     </div>
     <p class="sub">Social impact</p>
     <div class="marks row">
-      {logo('rotaract', 'Rotaract Club Berlin International', 39)}
+      {logo('rotaract', 'Rotaract Club Berlin International', 27)}
     </div>
     <h2>{SECTION["qr"]}This CV, online</h2>
     {qr()}
