@@ -220,8 +220,15 @@ education:
     note: Certified ExO Consultant; UX/UI design bootcamp; accelerator programme
 
 languages:
-  - { name: German,  level: native }
-  - { name: English, level: "C2 · business-fluent" }
+  # Leo rates the last three on his own 1-5 scale, 1 being strongest. Written
+  # here as plain words rather than invented CEFR grades: a CV that claims B1
+  # Spanish invites an interviewer to try it, and the claim has to hold.
+  # `bar` is how much of the track fills; it is the same self-assessment.
+  - { name: German,  level: native,                bar: 100 }
+  - { name: English, level: "C2 · business-fluent", bar: 95 }
+  - { name: Spanish, level: conversational,        bar: 55 }
+  - { name: Italian, level: basic,                 bar: 38 }
+  - { name: Russian, level: beginner,                bar: 22 }
 
 publications:
   - title: grounded-ai-evals — a four-layer method for evaluating AI that answers with evidence
