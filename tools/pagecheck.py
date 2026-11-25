@@ -36,8 +36,8 @@ def main() -> int:
     if "--build" in sys.argv:
         subprocess.run([sys.executable, str(ROOT / "build.py")], check=True)
 
-    page = ROOT / "cv.html"
-    if not page.exists():
+    editions = [f for f in (ROOT / "cv.html", ROOT / "cv.de.html") if f.exists()]
+    if not editions:
         print("no cv.html — run build.py first", file=sys.stderr)
         return 2
 
@@ -47,9 +47,21 @@ def main() -> int:
         print("needs playwright:  pip install playwright", file=sys.stderr)
         return 2
 
-    pdf = pathlib.Path(tempfile.gettempdir()) / "cv-pagecheck.pdf"
+    worst = 0
     with sync_playwright() as pw:
         browser = pw.chromium.launch(channel="chrome")
+        for page in editions:
+            worst = max(worst, check(browser, page))
+        browser.close()
+    return worst
+
+
+def check(browser, page) -> int:
+    """One edition. Both have to fit: a German sentence is reliably longer than
+    its English original, so the language that fits is not evidence about the
+    other one."""
+    pdf = pathlib.Path(tempfile.gettempdir()) / f"pagecheck-{page.stem}.pdf"
+    if True:
         p = browser.new_page(viewport={"width": WIDTH_PX, "height": PAGE_PX})
         p.goto(page.as_uri())
         p.emulate_media(media="print")
@@ -95,11 +107,12 @@ def main() -> int:
                     heading: at('h2'), bar: at('.bar-n'), chip: at('.chip')};
         }""")
         p.pdf(path=str(pdf), prefer_css_page_size=True, print_background=True)
-        browser.close()
+        p.close()
 
     pages = len(re.findall(rb"/Type\s*/Page[^s]", pdf.read_bytes()))
 
     ragged = {k: v for k, v in edges.items() if v is not None and v != edges["heading"]}
+    print(f"\n{page.name}")
     clipped = False
     for i, sh in enumerate(sheets, 1):
         room = sh["have"] - sh["want"]

@@ -1,0 +1,265 @@
+# Die deutsche Ausgabe. Gleicher Aufbau wie cv.yaml, gleiche Regel: Arbeitgeber
+# werden genannt, Kunden beschrieben. Wer einen Kunden auf einer öffentlichen
+# Seite nennt, entscheidet das für den Kunden mit — also stehen sie hier nach
+# Branche und Größe.
+#
+# Keine Übersetzung Wort für Wort: die englische Fassung ist für internationale
+# Rollen geschrieben, diese für deutsche. Wo das deutsche Wort präziser ist,
+# steht das deutsche.
+
+lang: de
+
+labels:
+  cv: Lebenslauf
+  strengths: Stärken
+  skills: Kompetenzen
+  unit: "Selbsteinschätzung: wie viel davon ich selbst trage."
+  steps: [führend, stark, solide, lesen & steuern]
+  map: Wo die Arbeit stattfand
+  languages: Sprachen
+  credentials: Nachweise
+  funded: Gefördert durch
+  certified: Zertifiziert durch
+  voluntary: Ehrenamtliche Tätigkeiten
+  business: Wirtschaftlicher Beitrag
+  social: Gesellschaftlicher Beitrag
+  online: Dieser Lebenslauf, online
+  always: Immer die aktuelle Fassung.
+  experience: Berufserfahrung
+  education: Ausbildung
+  projects: Ausgewählte Projekte
+  rest: "Der Rest, mit Code und Befunden:"
+  publications: Veröffentlichungen
+  role: Technical Product Owner
+  generated: >-
+    Erzeugt aus <code>cv.de.yaml</code>. Kunden werden beschrieben, nicht
+    genannt.
+  source: Quellcode
+  theme: Hell oder dunkel
+
+person:
+  name: Leonardo Bornhäußer
+  headline: Technical Product Owner & Architekt · Venture Builder · KI in regulierten Umfeldern
+  location: Berlin · remote
+  email: leonardo@creativate.tech
+  links:
+    - { label: LinkedIn, url: "https://www.linkedin.com/in/leonardo-bornhäußer/" }
+    - { label: GitHub,   url: "https://github.com/adminleo" }
+    - { label: ORCID,    url: "https://orcid.org/0009-0005-6464-5179" }
+
+summary: >-
+  Technischer Produktverantwortlicher und Architekt, der die ganze Spanne sauber
+  ausfüllt — Systementwurf, Technologieentscheidungen und die Führung der Teams,
+  die liefern — mit dem Schwerpunkt, Innovation und Produkt zu bauen und beides
+  dann zu skalieren. Ebenso zu Hause als technischer PO, Architekt, Tech Lead
+  oder im PMO. Zehn Jahre in Softwareprojekten, vier davon tief in angewandter
+  KI. Ich analysiere und priorisiere Anforderungen, führe agile Teams durch
+  Planung und Reviews und entscheide Architektur und Technologie von
+  Microservices und CI/CD bis Cloud und On-Premise. Code lese, prüfe und steuere
+  ich täglich in Python und TypeScript — der Großteil des Tippens ist agentisches
+  („Vibe") Coding unter meinem Review, nicht meine eigenen Anschläge.
+  Produktentscheidungen werden gemessen statt geglaubt — die datengetriebene
+  Seite der Rolle. Regulierte Umfelder von innen: Sparkassen-Finanzgruppe,
+  öffentliche Hand, C-Level-Arbeit mit börsennotierten Finanz- und
+  Gesundheitskonzernen. Als Mitgründer eines
+  Company Builders habe ich internationale, mehrsprachige Teams von rund 100
+  Personen aufgebaut und geführt. Das Unternehmen um das Produkt herum baue ich
+  so selbstverständlich wie das Produkt: acht Gründungen, ~3 Mio. € eingeworben,
+  ein Exit vollzogen.
+
+strengths:
+  - { name: Produktverantwortung & Delivery,   level: 95 }
+  - { name: "Architektur & Systementwurf",     level: 90 }
+  - { name: Teamführung & Skalierung,          level: 90 }
+  - { name: "Angewandte KI & Agenten",       level: 90 }
+  - { name: "Venture Building & Finanzierung", level: 85 }
+  - { name: "Datenanalyse & Experimentdesign", level: 70 }
+  # Bewusst die Hälfte: ich lese, prüfe und steuere Code täglich und entscheide
+  # die Architektur drumherum — geschrieben wird der Großteil nicht von mir.
+  - { name: Eigene Entwicklungsarbeit,         level: 50 }
+
+map:
+  note: "Teams und Delivery, die ich geführt habe: Europa · Subsahara-Afrika · Südasien"
+  pins:
+    - { name: "Deutschland — Berlin & Frankfurt", lat: 52.5, lon: 13.4 }
+    - { name: Subsahara-Afrika, lat: 4.0,  lon: 18.0 }
+    - { name: Südasien,         lat: 29.0, lon: 71.0 }
+
+kpis:
+  - { figure: "10+",       label: "Jahre in Softwareprojekten" }
+  - { figure: "7+",        label: "Produkte bis in den Betrieb" }
+  - { figure: "1 Mio.+",   label: "Zeilen Code seit 01/2026, agentisch gebaut" }
+  - { figure: "~3 Mio. €", label: "Förderung und Finanzierung eingeworben" }
+  - { figure: "~100",      label: "Personen international geführt" }
+  - { figure: "BSFZ 2026", label: "F&E-zertifiziert (Forschungszulage)" }
+
+experience:
+  - title: Technical Product Owner & Gründer
+    company: Creativate Technologies GmbH
+    period: Apr 2024 – heute
+    location: Berlin · remote · international verteiltes, mehrsprachiges Team
+    summary: >-
+      Seit 10/2026 in Vollzeit-Weiterbildung (Data Science); diese Rolle auf
+      5–10 Stunden pro Woche reduziert — in Vollzeit verfügbar. Technische
+      Produktverantwortung für KI-Software von der Anforderung bis zum Betrieb.
+      Schwerpunkt öffentliche Hand: EU-souveräne, on-premise-fähige KI- und
+      Agentensysteme, gemeinsam mit Beratungshäusern als Alternative zu
+      Drittstaaten-Anbietern.
+    bullets:
+      - Wissensgraph-Plattform für Entscheidungsintelligenz von der ersten Zeile bis zum produktiven On-Premise-PoC mit einer Stadtverwaltung und zu Enterprise-Tenants gebaut; 2026 den Monolithen durch eine Service-Plattform mit eigenem Identitäts- (OIDC) und Billing-Dienst ersetzt
+      - KI-gestütztes Engineering-Betriebsmodell eingeführt — Ticket als Spezifikation, Agenten mit MCP-Zugriff, Review und Tests durch Menschen, Bestätigungs-Gate vor irreversiblen Aktionen, KI-Verbrauch je Projekt und Rolle erfasst
+      - "Produktmanagement in geförderter F&E: Konsortialrunden, Roadmap gegen Förderziele gesteuert, ~2,5 Mio. € Fördervolumen koordiniert; Lead eines BSFZ-zertifizierten F&E-Projekts im Umfeld von Deutschland-Stack und FITKO-Standards (XÖV, FIM/LeiKa, NOOTS)"
+      - "Regulierte Umfelder: KI-Architektur und Business-Value auf C-Level mit einer Börsengruppe, einer börsennotierten Gewerbeimmobilienbank und einem DAX-notierten Gesundheitskonzern"
+
+  - title: Head of Operations & Mitgründer
+    company: Camsol-Gruppe — Company Builder (heute seventy2 Holding GmbH)
+    period: Nov 2022 – Apr 2025
+    location: Berlin · Standorte in Europa, Subsahara-Afrika und Südasien
+    summary: >-
+      Company Builder mit Inkubator und Pre-Seed-/Seed-Investments, darunter
+      eine Nearshore-/Offshore-Delivery-Gesellschaft und ein Joint Venture mit
+      einem pakistanischen Partner. Verantwortung für Operations, Delivery und
+      Roadmaps über das gesamte Portfolio.
+    bullets:
+      - Von 2 Gründern auf ~100 Personen in Europa, Afrika und Südasien skaliert; 6 GmbHs und 2 Ltds
+      - Delivery-Modell etabliert — Anforderungen, Abnahme und Eskalation in Deutschland, Umsetzung durch internationale Teams; Design, Frontend, Backend und Security über OKRs und KPIs geführt
+      - Inkubator-Portfolio bis zu den ersten zahlenden Kunden geführt; Ventures finanziert und teils veräußert
+      - "Politische Vorarbeit für das Modell: 2023 Gespräche mit Mitgliedern des Deutschen Bundestages über Technologiepartnerschaften mit Subsahara-Afrika"
+
+  - title: Produktdesigner & Projektmanager
+    company: Karla Plattform GmbH · Sparkassen-Finanzgruppe
+    period: Apr 2021 – Okt 2022
+    location: Greifswald · Java-geprägtes Enterprise-Finanzumfeld
+    summary: >-
+      Beyond-Banking-Vorhaben der Sparkassen-Finanzgruppe im Auftrag des DSGV:
+      die Plattform vom Konzept bis zum Rollout gebracht, Fachbereich,
+      Entwicklung und Vorstand in einem stark regulierten Umfeld zusammengehalten.
+    bullets:
+      - Headless CMS und Multi-Vendor-Commerce konzipiert und umgesetzt, mit Schnittstellen zu den Java-Kernsystemen
+      - "Proxy Product Owner für drei Gesellschafter-Sparkassen: Anforderungen gebündelt und priorisiert, Gremienentscheidungen vorbereitet, Vorstandsreporting"
+      - "Mit dem Vorstand beim DSGV gepitcht: 500.000 € Finanzierung eingeworben"
+
+  - title: Transformations- & Technologieberater (ExO)
+    company: Bornhäußer & Friends GmbH
+    period: Jul 2019 – Sep 2021
+    location: Berlin
+    summary: Beratung zu Architektur, Technologie und organisationaler Transformation; Modernisierung von Technologie-Stacks.
+
+skills:
+  - group: Produkt & Delivery
+    core:  [Anforderungen & Priorisierung, Roadmaps, Stakeholder & C-Level]
+    items: [Backlog Refinement, Planning & Reviews, Scrum / Kanban,
+            OKRs & KPIs, PMO, Förderprojekte, Konsortien, Nearshore-Delivery]
+  - group: Architektur, Cloud & Daten
+    core:  [Microservices, Kubernetes, AWS]
+    items: [REST / OpenAPI, Event-driven, Docker, CI/CD, Azure · GCP · Hetzner,
+            On-Premise · air-gapped, PostgreSQL · pgvector, Graph-DB,
+            Observability, Java / Spring (beratend)]
+  - group: KI, Agenten & Daten
+    core:  ["Agentisches · „Vibe\"-Coding", Wissensgraphen · GraphRAG, Evals & Test-Gates]
+    items: [Anthropic · OpenAI · Gemini, Ollama on-premise, MCP,
+            Routing & Kosten, Bestätigungs-Gates, Provenienz,
+            Experimentdesign, Python · SQL]
+  - group: Regulierte Umfelder
+    core:  [EU AI Act, DSGVO, Deutschland-Stack · FITKO]
+    items: [Sparkassen-Finanzgruppe, Börsennotierte (C-Level), Öffentliche Hand,
+            Kommunaler On-Prem-PoC, EU-souveräne KI, Informationssicherheit,
+            BSI-Grundschutz]
+
+projects:
+  - title: "Neurosymbolische Reasoning-Schicht — neuronal vorschlagen, symbolisch prüfen"
+    featured: true
+    period: 2026 – heute · Gründer, Architekt & Lead · geförderte F&E
+    tech: Python · Wissensgraph · OWL/SHACL-Constraints · GraphRAG · offene Modelle · Testsuite
+    summary: >-
+      Forschungsrichtung und Systementwurf: Modellausgaben werden Aussage für
+      Aussage an einen belegten Graphen gebunden — gestützt oder offen, nie
+      geraten. Der Zitationspfad läuft deterministisch, ohne Modell, verankert
+      in amtlichen Registern. Mit DOI veröffentlicht.
+
+  - title: "KI-Antrags- und Förderassistent für die öffentliche Hand"
+    period: 2026 – heute · Gründer & Lead
+    tech: Python · Next.js/TypeScript · Java 21 / Spring Boot 3 · PostgreSQL · Docker · GitHub Actions · AWS
+    summary: >-
+      Vorausgefüllte Anträge und Förderrecherche für Verwaltungsleistungen.
+      Dahinter ein Data Mesh strukturierter Datensätze als Belegschicht und ein
+      regelbasierter Spring-Boot-Routing-Dienst, der ein Anliegen
+      deterministisch und nachprüfbar der zuständigen Stelle zuordnet.
+      Nachvollziehbarkeit und Datenhoheit als Entwurfsbedingung.
+
+  - title: "KI-gestütztes Engineering-Betriebsmodell"
+    featured: true
+    period: 2024 – heute · verantwortlich · über 1 Mio. Zeilen Code seit 01/2026
+    tech: Agentisches Coding · Anthropic/OpenAI/Gemini · Ollama on-premise · MCP · GitHub Actions · ADRs · Offline-Test-Gates
+    summary: >-
+      Das Betriebsmodell dahinter, von mir entworfen und durchgesetzt: Ticket
+      als Spezifikation, Agenten setzen mit Zugriff auf Repository, Datenbank
+      und APIs um, Menschen reviewen und testen, Bestätigungs-Gate vor allem
+      Irreversiblen, Verbrauch je Projekt und Rolle erfasst. Qualitäts-Gates
+      statt Vertrauen: Verträge, hermetische Offline-Tests, ADRs als Gedächtnis.
+
+  - title: "Drei SaaS-Produkte bis zu zahlenden Kunden"
+    period: 2025 – 2026 · Gründer & Lead
+    tech: Next.js/TypeScript · FastAPI/Python · Tauri · Stripe · Magic-Link-Auth · OAuth · AWS
+    summary: >-
+      Eine B2B-Lead-Engine mit ICP-Scoring, Mandantentrennung, Billing und
+      CRM-Anbindungen; ein Sprachnotiz-zu-Aufgabe-Assistent als SaaS und
+      signierte Desktop-App; ein dreisprachiger KI-Readiness-Check mit
+      automatisiertem PDF-Report. Positionierung, Preise und Leistungsgrenzen
+      durchgehend verantwortet; nach Marktrückmeldung als Bausteine in die
+      Plattform überführt statt separat weiterbetrieben.
+
+  - title: "Wissensgraph-Entscheidungsintelligenz — Open-Core-Plattform"
+    featured: true
+    period: 2024 – heute · Gründer, Architekt & Lead
+    tech: Next.js/TypeScript · Python/FastAPI · PostgreSQL/pgvector · Graph-DB · GPU-Worker · Docker · Kubernetes · AGPL-3.0 + kommerziell
+    summary: >-
+      Architektur, Produktverantwortung und Delivery von der ersten Zeile bis zu
+      zahlenden Mandanten: Sprachmodelle an einen prüfbaren Wissensspeicher
+      gebunden, auditierbar, Cloud oder vollständig on-premise. 2026 den
+      Monolithen durch eine Service-Plattform mit eigenem Identitäts- und
+      Billing-Dienst ersetzt. Open Core: ein Mandant ist Konfiguration.
+
+  - title: "Brustkrebs-Früherkennung — native Mobile- und Web-Anwendung"
+    period: 2023 – 2025 · Head of Operations / Venture Lead
+    tech: Native iOS/Android · Web · MongoDB · KI-Begleiter · Ultraschall-Auswertung (BI-RADS)
+    summary: >-
+      Selbstuntersuchung und Vermittlung an Fachärzte in unterversorgten
+      Regionen, dazu ein klinisches Werkzeug, das einen radiologisch geprüften
+      BI-RADS-Befund erzeugt. Produktmanagement mit klinischen und regulatorischen
+      Stakeholdern; Privacy by Design für sensible Gesundheitsdaten.
+
+  - title: "IoT-CO₂-Überwachung und ESG-Berichterstattung"
+    period: 2022 – 2024 · Head of Operations / Venture Lead
+    tech: IoT-Sensorik (LTE-M, batteriebetrieben) · Cloud-Analytik · Headless CMS · Web-Dashboard
+    summary: >-
+      Ersetzt die manuelle Überwachung von Gasflaschen über Standorte hinweg:
+      Sensorik in die Cloud auf ein Dashboard mit Verbrauchsprognose und
+      automatischer Nachbestellung, mit TRGS-510-Konformität und
+      ESG-Berichterstattung. Im Inkubator gebaut und zu Enterprise-Kunden in
+      Automotive-Services, Catering, Mode und Bankwesen gebracht.
+
+education:
+  - title: International Business Administration (B.A.) · BWL (B.Sc.)
+    note: ohne Abschluss
+    period: ≈ 90 ECTS · Ø 1,7
+    company: BSP Business School Berlin · Universität Greifswald
+  - title: Zertifikate und Programme
+    period: 2020 – 2025
+    company: OpenExO · Ironhack · Futury
+    note: Certified ExO Consultant; UX/UI-Design-Bootcamp; Accelerator-Programm
+
+languages:
+  - { name: Deutsch,     level: Muttersprache,            bar: 100 }
+  - { name: Englisch,    level: "C2 · verhandlungssicher", bar: 95 }
+  - { name: Spanisch,    level: Konversation,             bar: 55 }
+  - { name: Italienisch, level: Grundkenntnisse,          bar: 38 }
+  - { name: Russisch,    level: Anfänger,                 bar: 22 }
+
+publications:
+  - title: grounded-ai-evals — vierschichtiges Verfahren zur Bewertung belegender KI
+    note: Bibliothek und Release-Gate, Apache-2.0
+    doi: 10.5281/zenodo.24100702
+  - title: Governed graph growth — einen fortlaufend befüllten Graphen verlässlich halten
+    note: Technische Notiz, CC BY 4.0
+    doi: 10.5281/zenodo.24099664
