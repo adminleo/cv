@@ -110,7 +110,11 @@ h3{margin:.95rem 0 .3rem;font-size:.7rem;font-weight:700;letter-spacing:.07em;
 .world .halo{fill:var(--accent);opacity:.2}
 .world .pin{fill:var(--accent)}
 .map-note{margin:0;font-size:.73rem;color:var(--muted);line-height:1.35}
-.qr{display:block;width:27mm;height:27mm;margin:.2rem 0 .3rem;fill:var(--ink);
+/* A seal says "certified"; it does not say by whom, under what, or when. The
+   line under it does, and it is the part a reader can check. */
+.mark-note{margin:.25rem 0 0;font-size:.68rem;color:var(--muted);line-height:1.4}
+.avail{margin:.1rem 0 0;font-size:.79rem;color:var(--ink);line-height:1.45}
+.qr{display:block;width:31mm;height:31mm;margin:.2rem 0 .3rem;fill:var(--ink);
   -webkit-print-color-adjust:exact;print-color-adjust:exact}
 
 h1{margin:0;font-size:2.25rem;line-height:1.08;letter-spacing:-.02em;
@@ -313,6 +317,7 @@ SECTION = dict(
                  '<path d="M6 11v5c0 1.1 2.7 2 6 2s6-.9 6-2v-5"/>'),
     projects=_i('<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5'
                 'a2 2 0 0 1-2-2z"/>'),
+    availability=_i('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>'),
     qr=_i('<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>'
           '<rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM19 19h2v2h-2z"/>'),
     publications=_i('<path d="M6 2h8l4 4v16H6z"/><path d="M14 2v5h4"/>'
@@ -346,8 +351,10 @@ LABELS = dict(
     steps=["lead", "strong", "working", "read & direct"],
     map="Where the work was", languages="Languages", credentials="Credentials",
     funded="Funded by", certified="Certified by", voluntary="Voluntary work",
+    funded_note="", certified_note="",
     business="Business impact", social="Social impact",
     online="This CV, online", always="Always the current version.",
+    availability="Availability",
     experience="Experience", education="Education", projects="Selected projects",
     rest="The rest, with code and findings:", publications="Publications",
     role="Technical Product Owner",
@@ -567,6 +574,13 @@ def render(cv, nav=(), lang_code="en"):
         f'<a href="https://doi.org/{e(x["doi"])}">{e(x["doi"])}</a></div></div>'
         for x in cv.get("publications", []))
 
+    # A column that simply stops is fine; one that stops two thirds of the way
+    # up looks unfinished. This is the one thing a reader wants from a sidebar
+    # that the page does not say anywhere else in it.
+    availability = ("" if not cv.get("availability") else
+                    f'<h2 class="lg">{SECTION["availability"]}{e(L["availability"])}</h2>'
+                    + "".join(f'<p class="avail">{e(x)}</p>' for x in cv["availability"]))
+
     # Taller than the others: this mark is a stacked wordmark beside a ring,
     # so matching its cap height to theirs makes the whole lockup shrink.
     ki_park = (logo("ki-park", "KI Park e.V.", 19)
@@ -618,10 +632,12 @@ def render(cv, nav=(), lang_code="en"):
     <div class="marks">
       {logo('bmftr', 'German Federal Ministry of Research, Technology and Space', 52)}
     </div>
+    {f'<p class="mark-note">{e(L["funded_note"])}</p>' if L["funded_note"] else ""}
     <h3 class="lbl">{e(L["certified"])}</h3>
     <div class="marks">
       {logo('bsfz-siegel', 'BSFZ — research allowance certified 2026', 52)}
     </div>
+    {f'<p class="mark-note">{e(L["certified_note"])}</p>' if L["certified_note"] else ""}
     <h3 class="lbl">{e(L["voluntary"])}</h3>
     <p class="sub">{e(L["business"])}</p>
     <div class="marks row">
@@ -632,6 +648,7 @@ def render(cv, nav=(), lang_code="en"):
     <div class="marks row">
       {logo('rotaract', 'Rotaract Club Berlin International', 27)}
     </div>
+    {availability}
     <h2>{SECTION["qr"]}{e(L["online"])}</h2>
     {qr()}
     <p class="map-note">adminleo.github.io/cv<br>{e(L["always"])}</p>

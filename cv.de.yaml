@@ -15,7 +15,7 @@ labels:
   skills: Kompetenzen
   unit: "Selbsteinschätzung: wie viel davon ich selbst trage."
   steps: [führend, stark, solide, lesen & steuern]
-  map: Wo die Arbeit stattfand
+  map: Einsatzorte
   languages: Sprachen
   credentials: Nachweise
   funded: Gefördert durch
@@ -23,7 +23,7 @@ labels:
   voluntary: Ehrenamtliche Tätigkeiten
   business: Wirtschaftlicher Beitrag
   social: Gesellschaftlicher Beitrag
-  online: Dieser Lebenslauf, online
+  online: Lebenslauf online
   always: Immer die aktuelle Fassung.
   experience: Berufserfahrung
   education: Ausbildung
@@ -36,6 +36,9 @@ labels:
     genannt.
   source: Quellcode
   theme: Hell oder dunkel
+  availability: Verfügbarkeit
+  funded_note: "Öffentlich geförderte F&E, ~2,5 Mio. € koordiniert"
+  certified_note: "BSFZ-Bescheinigung nach dem Forschungszulagengesetz (FZulG), 2026"
 
 person:
   name: Leonardo Bornhäußer
@@ -48,20 +51,20 @@ person:
     - { label: ORCID,    url: "https://orcid.org/0009-0005-6464-5179" }
 
 summary: >-
-  Technischer Produktverantwortlicher und Architekt, der die ganze Spanne sauber
-  ausfüllt — Systementwurf, Technologieentscheidungen und die Führung der Teams,
-  die liefern — mit dem Schwerpunkt, Innovation und Produkt zu bauen und beides
-  dann zu skalieren. Ebenso zu Hause als technischer PO, Architekt, Tech Lead
-  oder im PMO. Zehn Jahre in Softwareprojekten, vier davon tief in angewandter
-  KI. Ich analysiere und priorisiere Anforderungen, führe agile Teams durch
-  Planung und Reviews und entscheide Architektur und Technologie von
-  Microservices und CI/CD bis Cloud und On-Premise. Code lese, prüfe und steuere
-  ich täglich in Python und TypeScript — der Großteil des Tippens ist agentisches
-  („Vibe") Coding unter meinem Review, nicht meine eigenen Anschläge.
-  Produktentscheidungen werden gemessen statt geglaubt — die datengetriebene
-  Seite der Rolle. Regulierte Umfelder von innen: Sparkassen-Finanzgruppe,
-  öffentliche Hand, C-Level-Arbeit mit börsennotierten Finanz- und
-  Gesundheitskonzernen. Als Mitgründer eines
+  Technischer Produktverantwortlicher und Architekt — Systementwurf,
+  Technologieentscheidungen und die Führung der Teams, die liefern.
+  Schwerpunkt: Innovation und Produkt bauen und beides dann skalieren. Welche
+  Rolle das Haus dafür vorsieht, ist zweitrangig — technischer PO, Architekt,
+  Tech Lead oder PMO. Zehn Jahre Softwareprojekte, vier davon tief in
+  angewandter KI. Ich schneide Anforderungen, priorisiere sie, führe agile
+  Teams durch Planung und Reviews und entscheide Architektur und Technologie:
+  von Microservices und CI/CD bis Cloud und On-Premise. Code lese, prüfe und
+  steuere ich täglich in Python und TypeScript — der Großteil des Tippens ist
+  agentisches („Vibe") Coding unter meinem Review, nicht mein eigener
+  Tastenanschlag. Produktentscheidungen werden gemessen, nicht geglaubt; das
+  ist die datengetriebene Seite der Rolle. Regulierte Umfelder kenne ich von
+  innen: Sparkassen-Finanzgruppe, öffentliche Hand, C-Level-Arbeit mit
+  börsennotierten Finanz- und Gesundheitskonzernen. Als Mitgründer eines
   Company Builders habe ich internationale, mehrsprachige Teams von rund 100
   Personen aufgebaut und geführt. Das Unternehmen um das Produkt herum baue ich
   so selbstverständlich wie das Produkt: acht Gründungen, ~3 Mio. € eingeworben,
@@ -79,7 +82,7 @@ strengths:
   - { name: Eigene Entwicklungsarbeit,         level: 50 }
 
 map:
-  note: "Teams und Delivery, die ich geführt habe: Europa · Subsahara-Afrika · Südasien"
+  note: "Geführte Teams und Delivery: Europa · Subsahara-Afrika · Südasien"
   pins:
     - { name: "Deutschland — Berlin & Frankfurt", lat: 52.5, lon: 13.4 }
     - { name: Subsahara-Afrika, lat: 4.0,  lon: 18.0 }
@@ -103,8 +106,8 @@ experience:
       5–10 Stunden pro Woche reduziert — in Vollzeit verfügbar. Technische
       Produktverantwortung für KI-Software von der Anforderung bis zum Betrieb.
       Schwerpunkt öffentliche Hand: EU-souveräne, on-premise-fähige KI- und
-      Agentensysteme, gemeinsam mit Beratungshäusern als Alternative zu
-      Drittstaaten-Anbietern.
+      Agentensysteme, gemeinsam mit Beratungshäusern — als Alternative zu
+      Anbietern aus Drittstaaten.
     bullets:
       - Wissensgraph-Plattform für Entscheidungsintelligenz von der ersten Zeile bis zum produktiven On-Premise-PoC mit einer Stadtverwaltung und zu Enterprise-Tenants gebaut; 2026 den Monolithen durch eine Service-Plattform mit eigenem Identitäts- (OIDC) und Billing-Dienst ersetzt
       - KI-gestütztes Engineering-Betriebsmodell eingeführt — Ticket als Spezifikation, Agenten mit MCP-Zugriff, Review und Tests durch Menschen, Bestätigungs-Gate vor irreversiblen Aktionen, KI-Verbrauch je Projekt und Rolle erfasst
@@ -117,9 +120,9 @@ experience:
     location: Berlin · Standorte in Europa, Subsahara-Afrika und Südasien
     summary: >-
       Company Builder mit Inkubator und Pre-Seed-/Seed-Investments, darunter
-      eine Nearshore-/Offshore-Delivery-Gesellschaft und ein Joint Venture mit
-      einem pakistanischen Partner. Verantwortung für Operations, Delivery und
-      Roadmaps über das gesamte Portfolio.
+      eine Nearshore-/Offshore-Gesellschaft und ein Joint Venture mit einem
+      pakistanischen Partner. Operations, Delivery und Roadmaps über das
+      gesamte Portfolio verantwortet.
     bullets:
       - Von 2 Gründern auf ~100 Personen in Europa, Afrika und Südasien skaliert; 6 GmbHs und 2 Ltds
       - Delivery-Modell etabliert — Anforderungen, Abnahme und Eskalation in Deutschland, Umsetzung durch internationale Teams; Design, Frontend, Backend und Security über OKRs und KPIs geführt
@@ -255,6 +258,10 @@ languages:
   - { name: Spanisch,    level: Konversation,             bar: 55 }
   - { name: Italienisch, level: Grundkenntnisse,          bar: 38 }
   - { name: Russisch,    level: Anfänger,                 bar: 22 }
+
+availability:
+  - In Vollzeit verfügbar
+  - Berlin oder remote
 
 publications:
   - title: grounded-ai-evals — vierschichtiges Verfahren zur Bewertung belegender KI
