@@ -31,12 +31,12 @@ CSS = """
   :root:not([data-theme="light"]){--ink:#e7e9ef;--muted:#99a0ad;--line:#2a2f3a;
     --accent:#9b8cf7;--sub:#c6ccd9;--side:#161a22;--bg:#10131a;--desk:#0a0c11;
     --chip:#1e222c;--chip-ink:#b3bac7;--core:#2a2458;--core-ink:#cfc6ff;
-    --track:#2a2f3b;--land:#262b36;--plate:#f4f5f8;--plate-pad:.45rem}
+    --track:#2a2f3b;--land:#262b36;--plate:#f4f5f8;--plate-pad:.5rem;--note:#5d6370}
 }
 :root[data-theme="dark"]{--ink:#e7e9ef;--muted:#99a0ad;--line:#2a2f3a;
   --accent:#9b8cf7;--sub:#c6ccd9;--side:#161a22;--bg:#10131a;--desk:#0a0c11;
   --chip:#1e222c;--chip-ink:#b3bac7;--core:#2a2458;--core-ink:#cfc6ff;
-  --track:#2a2f3b;--land:#262b36;--plate:#f4f5f8;--plate-pad:.45rem}
+  --track:#2a2f3b;--land:#262b36;--plate:#f4f5f8;--plate-pad:.5rem;--note:#5d6370}
 *{box-sizing:border-box}
 body{margin:0;background:var(--desk);color:var(--ink);
   font:15px/1.5 CVSans,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
@@ -112,7 +112,7 @@ h3{margin:.95rem 0 .3rem;font-size:.7rem;font-weight:700;letter-spacing:.07em;
 .map-note{margin:0;font-size:.73rem;color:var(--muted);line-height:1.35}
 /* A seal says "certified"; it does not say by whom, under what, or when. The
    line under it does, and it is the part a reader can check. */
-.mark-note{margin:.25rem 0 0;font-size:.68rem;color:var(--muted);line-height:1.4}
+.mark-note{margin:.3rem 0 0;font-size:.68rem;color:var(--note,var(--muted));line-height:1.4}
 .avail{margin:.1rem 0 0;font-size:.79rem;color:var(--ink);line-height:1.45}
 .qr{display:block;width:31mm;height:31mm;margin:.2rem 0 .3rem;fill:var(--ink);
   -webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -178,6 +178,10 @@ h1{margin:0;font-size:2.25rem;line-height:1.08;letter-spacing:-.02em;
 .note{font-size:.84rem;color:var(--ink);margin:0}
 .marks{display:flex;flex-direction:column;align-items:flex-start;gap:.85rem;margin:.15rem 0 0}
 .marks.row{flex-direction:row;align-items:center;gap:.7rem;flex-wrap:wrap}
+/* The seal is round and small, the note beside it is three lines: side by side
+   they make a block, stacked they make a white plate with a hole in it. */
+.marks.pair{flex-direction:row;align-items:center;gap:.55rem;flex-wrap:nowrap}
+.marks.pair .mark-note{flex:1 1 0;margin:0}
 /* The marks are dark ink on transparency. On a dark sheet they disappear, and
    inverting them would wreck the seal's colours — so in dark mode they sit on
    a light plate instead. */
@@ -631,13 +635,13 @@ def render(cv, nav=(), lang_code="en"):
     <h3 class="lbl">{e(L["funded"])}</h3>
     <div class="marks">
       {logo('bmftr', 'German Federal Ministry of Research, Technology and Space', 52)}
+      {f'<p class="mark-note">{e(L["funded_note"])}</p>' if L["funded_note"] else ""}
     </div>
-    {f'<p class="mark-note">{e(L["funded_note"])}</p>' if L["funded_note"] else ""}
     <h3 class="lbl">{e(L["certified"])}</h3>
-    <div class="marks">
+    <div class="marks pair">
       {logo('bsfz-siegel', 'BSFZ — research allowance certified 2026', 52)}
+      {f'<p class="mark-note">{e(L["certified_note"])}</p>' if L["certified_note"] else ""}
     </div>
-    {f'<p class="mark-note">{e(L["certified_note"])}</p>' if L["certified_note"] else ""}
     <h3 class="lbl">{e(L["voluntary"])}</h3>
     <p class="sub">{e(L["business"])}</p>
     <div class="marks row">
