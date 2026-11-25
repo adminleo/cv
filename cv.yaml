@@ -118,31 +118,31 @@ experience:
     summary: Consulting on architecture, technology and organisational transformation; modernisation of technology stacks.
 
 skills:
-  # Four clusters in reading order, all on the first sheet: what I own, what I
-  # build it on, what I build with it, where it has to hold up. A skills block
-  # continued overleaf is a skills block half read, and the order mirrors the
-  # strengths bars above it — product, architecture, AI.
-  #
-  # Chip-sized on purpose: the sidebar is 54 mm wide, and a chip that fills the
-  # whole line is a bullet wearing a grey background.
+  # Sixty chips is a word cloud: everything is there and nothing stands out, so
+  # the eye slides off. Two changes fix that without losing substance — near
+  # synonyms are merged into one chip ("Sprint planning & reviews" was three),
+  # and each group names the two or three that actually carry it. Those are
+  # tinted; the rest are context. A reader who scans only the tinted ones gets
+  # the right twelve words about me.
   - group: Product ownership & delivery
-    items: [Requirements, Prioritisation, Backlog refinement, Sprint planning, Reviews,
-            Roadmaps, Business–engineering interface, Stakeholder & C-level,
-            Scrum / Kanban, OKRs & KPIs, PMO, Funded projects, Consortium work,
-            Nearshore delivery]
+    core:  [Requirements & prioritisation, Roadmaps, Stakeholder & C-level]
+    items: [Backlog refinement, Sprint planning & reviews, Scrum / Kanban,
+            OKRs & KPIs, PMO, Funded & consortium projects, Nearshore delivery]
   - group: Architecture, cloud & data
-    items: [Microservices, REST / OpenAPI, Event-driven, Docker, Kubernetes, CI/CD,
-            DevOps, AWS, Azure, GCP, On-premise, Air-gapped, PostgreSQL, pgvector,
-            MongoDB, Graph DB, Observability, TypeScript, Java / Spring (advisory)]
+    core:  [Microservices, Kubernetes, AWS]
+    items: [REST / OpenAPI, Event-driven, Docker, CI/CD, Azure · GCP,
+            On-premise · air-gapped, PostgreSQL · pgvector, Graph DB,
+            Observability, Java / Spring (advisory)]
   - group: AI, agents & data
-    items: [Agentic coding, "\"Vibe coding\"", Anthropic, OpenAI, Gemini, Ollama on-premise,
-            MCP, Knowledge graphs, GraphRAG, Model routing, Cost control,
-            Confirmation gates, Provenance, Evals, Offline test gates,
-            Experiment design, Python, SQL]
+    core:  ["Agentic · \"vibe\" coding", Knowledge graphs · GraphRAG, Evals & test gates]
+    items: [Anthropic · OpenAI · Gemini, Ollama on-premise, MCP,
+            Model routing & cost control, Confirmation gates, Provenance,
+            Experiment design, Python · SQL]
   - group: Regulated environments & compliance
+    core:  [EU AI Act, GDPR, Deutschland-Stack · FITKO]
     items: [Savings banks group, Listed groups (C-level), Public sector,
-            City administration PoC, Deutschland-Stack, FITKO, EU-sovereign AI,
-            EU AI Act, GDPR, Information security, BSI baseline protection]
+            City administration PoC, EU-sovereign AI, Information security,
+            BSI baseline protection]
 
 projects:
   - title: "Neurosymbolic reasoning layer — propose neurally, verify symbolically"

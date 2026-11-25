@@ -144,9 +144,13 @@ h1{margin:0;font-size:2.25rem;line-height:1.08;letter-spacing:-.02em;
    colour, written as one long chain of middle dots that nobody reads. Grey,
    and in pieces you can scan. */
 .proj-tech{display:flex;flex-wrap:wrap;gap:.2rem .22rem;margin-top:.26rem}
-.chip{font-size:.7rem;line-height:1.42;color:#4a505d;background:#f1f2f6;
+.chip{font-size:.7rem;line-height:1.5;color:#4a505d;background:#f1f2f6;
   border-radius:3px;padding:0 .3rem;
   -webkit-print-color-adjust:exact;print-color-adjust:exact}
+/* The two or three that carry each group. Tinted rather than bolder: weight
+   alone disappears at this size, and a reader scanning only these should come
+   away with the right twelve words. */
+.chip.core{background:#e9e6fb;color:#3b2f8f;font-weight:600}
 .proj-sum{margin:.32rem 0 0;font-size:.865rem;color:#343842}
 .note{font-size:.84rem;color:#343842;margin:0}
 .marks{display:flex;flex-direction:column;align-items:flex-start;gap:.85rem;margin:.15rem 0 0}
@@ -412,9 +416,13 @@ def render(cv):
                 for l in p["links"]]
 
     def skill_block(groups):
-        return "".join(f'<h3>{e(g["group"])}</h3><div class="chips">'
-                       + "".join(f'<span class="chip">{e(i)}</span>' for i in g["items"])
-                       + "</div>" for g in groups)
+        out = []
+        for g in groups:
+            chips = "".join(f'<span class="chip core">{e(i)}</span>'
+                            for i in g.get("core", []))
+            chips += "".join(f'<span class="chip">{e(i)}</span>' for i in g["items"])
+            out.append(f'<h3>{e(g["group"])}</h3><div class="chips">{chips}</div>')
+        return "".join(out)
 
     # Three projects on the page, the rest on GitHub. Seven of them at
     # paragraph length was a third sheet, and a CV that runs to three pages is
