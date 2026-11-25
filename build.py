@@ -57,6 +57,11 @@ h2{display:flex;align-items:center;gap:.38rem;
   margin:1.4rem 0 .6rem;font-size:.82rem;font-weight:700;letter-spacing:.09em;
   text-transform:uppercase;color:var(--accent)}
 h2 svg{width:13px;height:13px;flex:0 0 auto;stroke-width:2.1}
+/* Two of these are small marks beside a short word and were disappearing
+   next to the logos and bars underneath them. */
+h2.lg svg{width:18px;height:18px;stroke-width:1.9}
+h3.lbl{margin:.75rem 0 .25rem;font-size:.78rem;letter-spacing:.06em;color:var(--sub)}
+h3.lbl:first-of-type{margin-top:.35rem}
 .side h2:first-of-type{margin-top:0}
 h3{margin:.95rem 0 .3rem;font-size:.7rem;font-weight:700;letter-spacing:.07em;
   text-transform:uppercase;color:var(--sub)}
@@ -71,7 +76,10 @@ h3{margin:.95rem 0 .3rem;font-size:.7rem;font-weight:700;letter-spacing:.07em;
    whether it should be 85 or 90, which is not the point. The point is the
    shape of the column: where the weight sits between hands-on and leading. */
 .bar{margin:.4rem 0}
-.bar-n{font-size:.76rem;color:#3c414c;line-height:1.3}
+.bar-n{display:flex;justify-content:space-between;align-items:baseline;gap:.4rem;
+  font-size:.76rem;color:#3c414c;line-height:1.3}
+.bar-s{font-size:.66rem;color:var(--muted);white-space:nowrap;letter-spacing:.02em}
+.unit{margin:.45rem 0 0;font-size:.68rem;color:var(--muted);line-height:1.35}
 .bar-t{height:4px;border-radius:2px;background:#dde0ea;margin-top:.22rem;
   -webkit-print-color-adjust:exact;print-color-adjust:exact}
 .bar-f{height:4px;border-radius:2px;background:var(--accent);
@@ -125,7 +133,7 @@ h1{margin:0;font-size:2.25rem;line-height:1.08;letter-spacing:-.02em;
 .main li{margin:.17rem 0;font-size:.845rem;color:#343842}
 
 .proj{margin:0 0 .8rem;page-break-inside:avoid}
-.proj-title{font-weight:650;font-size:.88rem}
+.proj-title{font-weight:700;font-size:.97rem;letter-spacing:-.005em}
 .proj-period{color:var(--muted);font-size:.76rem;margin-top:.08rem}
 /* The tech list was the weakest information on the page wearing the strongest
    colour, written as one long chain of middle dots that nobody reads. Grey,
@@ -134,9 +142,10 @@ h1{margin:0;font-size:2.25rem;line-height:1.08;letter-spacing:-.02em;
 .chip{font-size:.7rem;line-height:1.5;color:#4a505d;background:#f1f2f6;
   border-radius:3px;padding:0 .3rem;
   -webkit-print-color-adjust:exact;print-color-adjust:exact}
-.proj-sum{margin:.3rem 0 0;font-size:.84rem;color:#343842}
+.proj-sum{margin:.32rem 0 0;font-size:.865rem;color:#343842}
 .note{font-size:.84rem;color:#343842;margin:0}
-.marks{display:flex;flex-direction:column;align-items:flex-start;gap:.85rem;margin:.55rem 0 0}
+.marks{display:flex;flex-direction:column;align-items:flex-start;gap:.85rem;margin:.15rem 0 0}
+.marks.row{flex-direction:row;align-items:center;gap:.7rem;flex-wrap:wrap}
 .mark{display:block;width:auto;object-fit:contain}
 .marks .txt{font-size:.78rem;color:var(--muted);font-weight:600}
 .pub{margin:0 0 .45rem}
@@ -271,13 +280,27 @@ def e(x):
     return html.escape(str(x), quote=False)
 
 
-def bars(items):
-    """A proficiency bar per line. Levels come from cv.yaml and are a
-    self-assessment; see the note there."""
-    return "".join(
-        f'<div class="bar"><div class="bar-n">{e(b["name"])}</div>'
+# A bar without a unit is a decoration: the reader cannot tell whether a full
+# one means "expert" or "all of my week". These say which — how much of that
+# work I carry myself — and name the step in words, because a printed 85
+# invites an argument about whether it should be 90.
+def step(level: int) -> str:
+    if level >= 90:
+        return "lead"
+    if level >= 75:
+        return "strong"
+    if level >= 60:
+        return "working"
+    return "read & direct"
+
+
+def bars(items, unit=""):
+    out = "".join(
+        f'<div class="bar"><div class="bar-n">{e(b["name"])}'
+        f'<span class="bar-s">{e(b.get("step") or step(int(b["level"])))}</span></div>'
         f'<div class="bar-t"><div class="bar-f" style="width:{int(b["level"])}%"></div></div>'
         f'</div>' for b in items)
+    return out + (f'<p class="unit">{e(unit)}</p>' if unit else "")
 
 
 def qr():
@@ -367,11 +390,16 @@ def render(cv):
     links = " · ".join(f'<a href="{e(l["url"])}">{e(l["label"])}</a>' for l in p["links"])
     kpis = "".join(f'<div class="kpi"><div class="fig">{e(k["figure"])}</div>'
                    f'<div class="lab">{e(k["label"])}</div></div>' for k in cv["kpis"])
-    # A language is the one skill where a bar is not a self-flattering guess:
-    # the levels are the CEFR scale, and native is the top of it.
-    lang_bars = [dict(name=f'{l["name"]} — {l["level"]}',
-                      level=100 if "native" in l["level"].lower() else 95)
-                 for l in cv["languages"]]
+    # A language is the one skill where the unit is not mine to invent: the
+    # step is the CEFR grade itself, and native is the top of that scale. The
+    # competence words used for the strengths would be nonsense here.
+    def lang(l):
+        grade, _, rest = l["level"].partition("·")
+        name = l["name"] + (f' · {rest.strip()}' if rest.strip() else "")
+        return dict(name=name, step=grade.strip(),
+                    level=100 if "native" in grade.lower() else 95)
+
+    lang_bars = [lang(l) for l in cv["languages"]]
 
     contact = [f'<li>{ICONS["pin"]}<span>{e(p["location"])}</span></li>',
                f'<li>{ICONS["mail"]}<a href="mailto:{e(p["email"])}">{e(p["email"])}</a></li>']
@@ -406,7 +434,7 @@ def render(cv):
 
     # Taller than the others: this mark is a stacked wordmark beside a ring,
     # so matching its cap height to theirs makes the whole lockup shrink.
-    ki_park = (logo("ki-park", "KI Park e.V.", 29)
+    ki_park = (logo("ki-park", "KI Park e.V.", 23)
                or '<span class="txt">KI Park e.V.</span>')
 
     def foot(n, left):
@@ -428,11 +456,9 @@ def render(cv):
     {photo()}
     <ul class="contact">{''.join(contact)}</ul>
     <h2>{SECTION["strengths"]}Strengths</h2>
-    {bars(cv.get('strengths', []))}
+    {bars(cv.get('strengths', []), 'Self-assessment: how much of this I carry myself, not how much I have read about it.')}
     <h2>{SECTION["skills"]}Skills</h2>
-    {skill_block(cv['skills'][:2] + cv['skills'][3:])}
-    <h2>{SECTION["map"]}Where the work was</h2>
-    {world(cv.get('map'))}
+    {skill_block(cv['skills'][:3])}
   </aside>
   <section class="main">
     <h1>{e(p['name'])}</h1>
@@ -448,14 +474,23 @@ def render(cv):
 <main class="sheet">
   <aside class="side">
     <h2>{SECTION["skills"]}Skills</h2>
-    {skill_block(cv['skills'][2:3])}
-    <h2>{SECTION["languages"]}Languages</h2>
+    {skill_block(cv['skills'][3:])}
+    <h2>{SECTION["map"]}Where the work was</h2>
+    {world(cv.get('map'))}
+    <h2 class="lg">{SECTION["languages"]}Languages</h2>
     {bars(lang_bars)}
-    <h2>{SECTION["marks"]}Funded, certified, member of</h2>
+    <h2 class="lg">{SECTION["marks"]}Credentials</h2>
+    <h3 class="lbl">Funded by</h3>
     <div class="marks">
-      {logo('bmftr', 'German Federal Ministry of Research, Technology and Space', 38)}
-      {logo('bsfz-siegel', 'BSFZ — research allowance certified 2026', 38)}
-      {logo('ki-bundesverband', 'German AI Association', 21)}
+      {logo('bmftr', 'German Federal Ministry of Research, Technology and Space', 52)}
+    </div>
+    <h3 class="lbl">Certified by</h3>
+    <div class="marks">
+      {logo('bsfz-siegel', 'BSFZ — research allowance certified 2026', 52)}
+    </div>
+    <h3 class="lbl">Voluntary work</h3>
+    <div class="marks row">
+      {logo('ki-bundesverband', 'German AI Association', 17)}
       {ki_park}
     </div>
     <h2>{SECTION["qr"]}This CV, online</h2>
