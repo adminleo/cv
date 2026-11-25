@@ -75,7 +75,7 @@ h3{margin:.95rem 0 .3rem;font-size:.7rem;font-weight:700;letter-spacing:.07em;
 /* Skills as chips, not bullets. Nine one-line bullets per group is a column
    of ragged ends; the same nine set as chips fill their width and read as
    one field of competence rather than a ranked list, which they never were. */
-.chips{display:flex;flex-wrap:wrap;gap:.2rem .22rem;margin:.12rem 0 .1rem}
+.chips{display:flex;flex-wrap:wrap;gap:.17rem .2rem;margin:.1rem 0 .08rem}
 
 /* Bars. The figure is never printed — a number invites an argument about
    whether it should be 85 or 90, which is not the point. The point is the
@@ -144,7 +144,7 @@ h1{margin:0;font-size:2.25rem;line-height:1.08;letter-spacing:-.02em;
    colour, written as one long chain of middle dots that nobody reads. Grey,
    and in pieces you can scan. */
 .proj-tech{display:flex;flex-wrap:wrap;gap:.2rem .22rem;margin-top:.26rem}
-.chip{font-size:.7rem;line-height:1.5;color:#4a505d;background:#f1f2f6;
+.chip{font-size:.7rem;line-height:1.42;color:#4a505d;background:#f1f2f6;
   border-radius:3px;padding:0 .3rem;
   -webkit-print-color-adjust:exact;print-color-adjust:exact}
 .proj-sum{margin:.32rem 0 0;font-size:.865rem;color:#343842}
