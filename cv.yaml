@@ -4,6 +4,10 @@
 # Naming a former employer is ordinary CV practice. Naming a client on a public
 # page is the client's call, not mine — so they appear here by sector and size.
 
+labels:
+  funded_note: "Publicly funded R&D, ~€2.5 M coordinated"
+  certified_note: "BSFZ certificate under the German Research Allowance Act (FZulG), 2026"
+
 person:
   name: Leonardo Bornhäußer
   headline: Technical Product Owner & Architect · Venture builder · AI in regulated environments
@@ -234,6 +238,10 @@ languages:
   - { name: Spanish, level: conversational,        bar: 55 }
   - { name: Italian, level: basic,                 bar: 38 }
   - { name: Russian, level: beginner,                bar: 22 }
+
+availability:
+  - Available full time
+  - Berlin or remote
 
 publications:
   - title: grounded-ai-evals — a four-layer method for evaluating AI that answers with evidence
