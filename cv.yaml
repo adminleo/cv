@@ -116,10 +116,10 @@ experience:
     summary: Consulting on architecture, technology and organisational transformation; modernisation of technology stacks.
 
 skills:
-  # Four clusters, in the order a reader of these roles cares about: what I own,
-  # what I build it with, where it has to hold up — and the stack itself last,
-  # on the second sheet, because the stack is the answer to a question nobody
-  # asks first.
+  # Four clusters in reading order: what I own, what I build it with, what it
+  # runs on — all three on the first sheet, because that is where a technical
+  # reader looks for them. Where it has to hold up follows on the second, next
+  # to the credentials that prove it.
   #
   # Chip-sized on purpose: the sidebar is 54 mm wide, and a chip that fills the
   # whole line is a bullet wearing a grey background.
@@ -133,14 +133,14 @@ skills:
             MCP, Knowledge graphs, GraphRAG, Model routing, Cost control,
             Confirmation gates, Provenance, Evals, Offline test gates,
             Experiment design, Python, SQL]
-  - group: Regulated environments & compliance
-    items: [Savings banks group, Listed groups (C-level), Public sector,
-            City administration PoC, Deutschland-Stack, FITKO, EU-sovereign AI,
-            EU AI Act, GDPR, Information security, BSI baseline protection]
   - group: Architecture, cloud & data
     items: [Microservices, REST / OpenAPI, Event-driven, Docker, Kubernetes, CI/CD,
             DevOps, AWS, Azure, GCP, On-premise, Air-gapped, PostgreSQL, pgvector,
             MongoDB, Graph DB, Observability, TypeScript, Java / Spring (advisory)]
+  - group: Regulated environments & compliance
+    items: [Savings banks group, Listed groups (C-level), Public sector,
+            City administration PoC, Deutschland-Stack, FITKO, EU-sovereign AI,
+            EU AI Act, GDPR, Information security, BSI baseline protection]
 
 projects:
   - title: "Neurosymbolic reasoning layer — propose neurally, verify symbolically"
