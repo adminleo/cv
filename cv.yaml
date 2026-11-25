@@ -6,8 +6,8 @@
 
 person:
   name: Leonardo Bornhäußer
-  headline: Technical Product Owner · Hands-on to leadership · Building and scaling AI products in regulated environments
-  location: Berlin · Frankfurt am Main · remote
+  headline: Technical Product Owner & Architect · AI products in regulated environments
+  location: Berlin · remote
   email: leonardo@creativate.tech
   links:
     - { label: LinkedIn, url: "https://www.linkedin.com/in/leonardo-bornhäußer/" }
@@ -15,32 +15,32 @@ person:
     - { label: ORCID,    url: "https://orcid.org/0009-0005-6464-5179" }
 
 summary: >-
-  Technical product owner who covers the whole range cleanly — hands-on in the
-  code, the architecture decisions, and the leadership of the teams that ship —
-  with the focus on building innovation and product and then scaling both. More
-  than ten years in software projects, more than six years of SaaS products,
-  more than four years deep in applied AI. I analyse and prioritise
-  requirements, guide agile teams through planning, reviews and refinement, and
+  Technical product owner and architect who covers the whole range cleanly —
+  system design, the technology decisions, and the leadership of the teams that
+  ship — with the focus on building innovation and product and then scaling
+  both. Equally at home as technical PO, architect, tech lead or PMO. Ten years
+  in software projects, four of them deep in applied AI. I analyse and
+  prioritise requirements, guide agile teams through planning and reviews, and
   decide architecture and technology from microservices and CI/CD to cloud and
-  on-premise; hands-on in Python and TypeScript, Java/Spring Boot at
-  architecture level, and working daily in agentic ("vibe") coding. Product
-  decisions are measured rather than believed — the data-driven side of the
-  role. Regulated environments from the inside: the German savings banks group,
-  public administration, and C-level work with listed financial and healthcare
-  groups. As co-founder of a company builder I built and led international,
-  multilingual teams of roughly 100 people.
+  on-premise. Code I read, review and direct daily in Python and TypeScript —
+  most of the typing is agentic ("vibe") coding under my review rather than my
+  own keystrokes. Product decisions are measured rather than believed, which is
+  the data-driven side of the role. Regulated environments from the inside: the
+  German savings banks group, public administration, C-level work with listed
+  financial and healthcare groups. As co-founder of a company builder I built
+  and led international, multilingual teams of roughly 100 people.
 
-# Self-assessment, and read as such by anyone who has seen a CV before. They
-# are here because the question the page has to answer first is where I sit
-# between writing the code and leading the people, and a bar answers it in a
-# glance where a paragraph does not.
 strengths:
   - { name: Product ownership & delivery,     level: 95 }
+  - { name: "Architecture & system design",   level: 90 }
   - { name: Team leadership & scaling,        level: 90 }
   - { name: "Applied AI, agents & LLM orchestration", level: 90 }
-  - { name: "Architecture, cloud & on-premise", level: 85 }
-  - { name: Hands-on engineering · Python/TS, level: 80 }
-  - { name: "Data analysis & experiment design", level: 75 }
+  - { name: "Data analysis & experiment design", level: 70 }
+  # Deliberately half. I read, review and direct code every day and decide the
+  # architecture around it; I am not the one writing the bulk of it, and a bar
+  # at 90 here would be the one line on the page a technical interview could
+  # disprove in five minutes.
+  - { name: Hands-on engineering,            level: 50 }
 
 # Plate carrée, so a pin is just its longitude and latitude. Regions rather
 # than street addresses: the teams were distributed, and a pin on a capital
@@ -67,7 +67,7 @@ experience:
   - title: Technical Product Owner & Founder
     company: Creativate Technologies GmbH
     period: Apr 2024 – present
-    location: Berlin & Frankfurt am Main · remote · internationally distributed, multilingual team
+    location: Berlin · remote · internationally distributed, multilingual team
     summary: >-
       Since 10/2026 in full-time further education (data science); this role
       reduced to 5–10 hours a week — available full time. Technical product
@@ -116,26 +116,31 @@ experience:
     summary: Consulting on architecture, technology and organisational transformation; modernisation of technology stacks.
 
 skills:
+  # Four clusters, in the order a reader of these roles cares about: what I own,
+  # what I build it with, where it has to hold up — and the stack itself last,
+  # on the second sheet, because the stack is the answer to a question nobody
+  # asks first.
+  #
   # Chip-sized on purpose: the sidebar is 54 mm wide, and a chip that fills the
-  # whole line is a bullet wearing a grey background. Short enough that two or
-  # three sit side by side, which is what makes the group read as a field of
-  # competence rather than a ranked list.
-  - group: Technical product ownership & delivery
+  # whole line is a bullet wearing a grey background.
+  - group: Product ownership & delivery
     items: [Requirements, Prioritisation, Backlog refinement, Sprint planning, Reviews,
-            Business–engineering interface, Architecture decisions, ADRs, Scrum / Kanban,
-            OKRs & KPIs, Funded projects, Consortium work, Nearshore delivery]
-  - group: AI in the SDLC & agents
+            Roadmaps, Business–engineering interface, Stakeholder & C-level,
+            Scrum / Kanban, OKRs & KPIs, PMO, Funded projects, Consortium work,
+            Nearshore delivery]
+  - group: AI, agents & data
     items: [Agentic coding, "\"Vibe coding\"", Anthropic, OpenAI, Gemini, Ollama on-premise,
             MCP, Knowledge graphs, GraphRAG, Model routing, Cost control,
-            Confirmation gates, Provenance, Evals, Offline test gates, Developer enablement]
-  - group: Tech, cloud & data
-    items: [Python, TypeScript, FastAPI, Next.js, Java / Spring (advisory), Microservices,
-            REST / OpenAPI, Docker, Kubernetes, CI/CD, DevOps, AWS, Azure, GCP,
-            On-premise, Air-gapped, PostgreSQL, pgvector, MongoDB, Graph DB, Observability]
+            Confirmation gates, Provenance, Evals, Offline test gates,
+            Experiment design, Python, SQL]
   - group: Regulated environments & compliance
     items: [Savings banks group, Listed groups (C-level), Public sector,
             City administration PoC, Deutschland-Stack, FITKO, EU-sovereign AI,
             EU AI Act, GDPR, Information security, BSI baseline protection]
+  - group: Architecture, cloud & data
+    items: [Microservices, REST / OpenAPI, Event-driven, Docker, Kubernetes, CI/CD,
+            DevOps, AWS, Azure, GCP, On-premise, Air-gapped, PostgreSQL, pgvector,
+            MongoDB, Graph DB, Observability, TypeScript, Java / Spring (advisory)]
 
 projects:
   - title: "Neurosymbolic reasoning layer — propose neurally, verify symbolically"
@@ -180,10 +185,11 @@ projects:
     period: 2024 – present · founder, architect & lead
     tech: Next.js/TypeScript · Python/FastAPI microservices · PostgreSQL/pgvector · graph DB · GPU worker · Docker · Kubernetes/Terraform · AGPL-3.0 + commercial licence
     summary: >-
-      Language models bound to a verifiable knowledge store: auditable, cloud or
-      fully on-premise. Built from zero; in 2026 the monolith became a service
-      platform with its own identity and billing. Open core — a tenant is
-      configuration, while grounding, tenant isolation, provenance and the
+      Architecture, product ownership and delivery from the first line of code
+      to paying tenants: language models bound to a verifiable knowledge store,
+      auditable, cloud or fully on-premise. In 2026 I replaced the monolith with
+      a service platform carrying its own identity and billing. Open core — a
+      tenant is configuration, while grounding, isolation, provenance and the
       confirmation gate stay in the core.
   - title: "Breast-cancer early detection — native mobile and web"
     period: 2023 – 2025 · head of operations / venture lead
@@ -215,7 +221,7 @@ education:
 
 languages:
   - { name: German,  level: native }
-  - { name: English, level: "C2 · fully business-fluent (English-language schooling)" }
+  - { name: English, level: "C2 · business-fluent" }
 
 publications:
   - title: grounded-ai-evals — a four-layer method for evaluating AI that answers with evidence
