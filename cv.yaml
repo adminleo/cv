@@ -116,10 +116,10 @@ experience:
     summary: Consulting on architecture, technology and organisational transformation; modernisation of technology stacks.
 
 skills:
-  # Four clusters in reading order: what I own, what I build it with, what it
-  # runs on — all three on the first sheet, because that is where a technical
-  # reader looks for them. Where it has to hold up follows on the second, next
-  # to the credentials that prove it.
+  # Four clusters in reading order, all on the first sheet: what I own, what I
+  # build it on, what I build with it, where it has to hold up. A skills block
+  # continued overleaf is a skills block half read, and the order mirrors the
+  # strengths bars above it — product, architecture, AI.
   #
   # Chip-sized on purpose: the sidebar is 54 mm wide, and a chip that fills the
   # whole line is a bullet wearing a grey background.
@@ -128,15 +128,15 @@ skills:
             Roadmaps, Business–engineering interface, Stakeholder & C-level,
             Scrum / Kanban, OKRs & KPIs, PMO, Funded projects, Consortium work,
             Nearshore delivery]
+  - group: Architecture, cloud & data
+    items: [Microservices, REST / OpenAPI, Event-driven, Docker, Kubernetes, CI/CD,
+            DevOps, AWS, Azure, GCP, On-premise, Air-gapped, PostgreSQL, pgvector,
+            MongoDB, Graph DB, Observability, TypeScript, Java / Spring (advisory)]
   - group: AI, agents & data
     items: [Agentic coding, "\"Vibe coding\"", Anthropic, OpenAI, Gemini, Ollama on-premise,
             MCP, Knowledge graphs, GraphRAG, Model routing, Cost control,
             Confirmation gates, Provenance, Evals, Offline test gates,
             Experiment design, Python, SQL]
-  - group: Architecture, cloud & data
-    items: [Microservices, REST / OpenAPI, Event-driven, Docker, Kubernetes, CI/CD,
-            DevOps, AWS, Azure, GCP, On-premise, Air-gapped, PostgreSQL, pgvector,
-            MongoDB, Graph DB, Observability, TypeScript, Java / Spring (advisory)]
   - group: Regulated environments & compliance
     items: [Savings banks group, Listed groups (C-level), Public sector,
             City administration PoC, Deutschland-Stack, FITKO, EU-sovereign AI,
