@@ -22,9 +22,23 @@ except ImportError:
 
 CSS = """
 :root{--ink:#1c1d22;--muted:#5d6370;--line:#e3e5ea;--accent:#6C5CE7;--sub:#2c2f38;
-  --side:#f7f7fb;--bg:#fff}
+  --side:#f7f7fb;--bg:#fff;--desk:#eceef2;--chip:#f1f2f6;--chip-ink:#4a505d;
+  --core:#e9e6fb;--core-ink:#3b2f8f;--track:#dde0ea;--land:#d9dce6;--plate:transparent}
+/* Dark follows the reader's system unless they have said otherwise on this
+   page; print always goes back to light, because a dark CV on paper is a
+   cartridge of toner and an unreadable sheet. */
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--ink:#e7e9ef;--muted:#99a0ad;--line:#2a2f3a;
+    --accent:#9b8cf7;--sub:#c6ccd9;--side:#161a22;--bg:#10131a;--desk:#0a0c11;
+    --chip:#1e222c;--chip-ink:#b3bac7;--core:#2a2458;--core-ink:#cfc6ff;
+    --track:#2a2f3b;--land:#262b36;--plate:#f4f5f8;--plate-pad:.45rem}
+}
+:root[data-theme="dark"]{--ink:#e7e9ef;--muted:#99a0ad;--line:#2a2f3a;
+  --accent:#9b8cf7;--sub:#c6ccd9;--side:#161a22;--bg:#10131a;--desk:#0a0c11;
+  --chip:#1e222c;--chip-ink:#b3bac7;--core:#2a2458;--core-ink:#cfc6ff;
+  --track:#2a2f3b;--land:#262b36;--plate:#f4f5f8;--plate-pad:.45rem}
 *{box-sizing:border-box}
-body{margin:0;background:#eceef2;color:var(--ink);
+body{margin:0;background:var(--desk);color:var(--ink);
   font:15px/1.5 CVSans,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
   -webkit-font-smoothing:antialiased}
 .sheet{width:210mm;min-height:297mm;margin:2.5rem auto;background:var(--bg);
@@ -39,7 +53,7 @@ body{margin:0;background:#eceef2;color:var(--ink);
 /* Left, not centred. A centred portrait over left-aligned contact lines
    gives the column two edges, and the eye follows the weaker one. */
 .avatar{width:92px;height:92px;border-radius:50%;object-fit:cover;display:block;
-  margin:0 0 1rem;background:#edeef3;
+  margin:0 0 1rem;background:var(--chip);
   box-shadow:0 0 0 1.5px rgba(108,92,231,.45);
   -webkit-print-color-adjust:exact;print-color-adjust:exact}
 /* .side ul below sets a bullet indent and outranks a bare .contact,
@@ -71,7 +85,7 @@ h3.lbl:first-of-type{margin-top:.35rem}
 h3{margin:.95rem 0 .3rem;font-size:.7rem;font-weight:700;letter-spacing:.07em;
   text-transform:uppercase;color:var(--sub)}
 .side ul{margin:0;padding-left:.85rem}
-.side li{font-size:.79rem;color:#3c414c;margin:.16rem 0}
+.side li{font-size:.79rem;color:var(--ink);margin:.16rem 0}
 /* Skills as chips, not bullets. Nine one-line bullets per group is a column
    of ragged ends; the same nine set as chips fill their width and read as
    one field of competence rather than a ranked list, which they never were. */
@@ -82,17 +96,17 @@ h3{margin:.95rem 0 .3rem;font-size:.7rem;font-weight:700;letter-spacing:.07em;
    shape of the column: where the weight sits between hands-on and leading. */
 .bar{margin:.4rem 0}
 .bar-n{display:flex;justify-content:space-between;align-items:baseline;gap:.4rem;
-  font-size:.76rem;color:#3c414c;line-height:1.3}
+  font-size:.76rem;color:var(--ink);line-height:1.3}
 .bar-s{font-size:.66rem;color:var(--muted);white-space:nowrap;letter-spacing:.02em}
 .unit{margin:.45rem 0 0;font-size:.68rem;color:var(--muted);line-height:1.35}
-.bar-t{height:4px;border-radius:2px;background:#dde0ea;margin-top:.22rem;
+.bar-t{height:4px;border-radius:2px;background:var(--track);margin-top:.22rem;
   -webkit-print-color-adjust:exact;print-color-adjust:exact}
 .bar-f{height:4px;border-radius:2px;background:var(--accent);
   -webkit-print-color-adjust:exact;print-color-adjust:exact}
 
 .world{display:block;width:100%;height:auto;margin:.1rem 0 .35rem;
   -webkit-print-color-adjust:exact;print-color-adjust:exact}
-.world .land{fill:#d9dce6}
+.world .land{fill:var(--land)}
 .world .halo{fill:var(--accent);opacity:.2}
 .world .pin{fill:var(--accent)}
 .map-note{margin:0;font-size:.73rem;color:var(--muted);line-height:1.35}
@@ -107,7 +121,7 @@ h1{margin:0;font-size:2.25rem;line-height:1.08;letter-spacing:-.02em;
    directly above the ruled figure band — flush on both edges, the two read as
    one object. Hyphenation is not optional with justification at this measure:
    without it the lines open up into rivers. */
-.summary{margin:0;font-size:.92rem;color:#343842;
+.summary{margin:0;font-size:.92rem;color:var(--ink);
   text-align:justify;hyphens:auto;-webkit-hyphens:auto}
 .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem 0;margin:1.15rem 0 0;
   border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:.7rem 0}
@@ -138,9 +152,9 @@ h1{margin:0;font-size:2.25rem;line-height:1.08;letter-spacing:-.02em;
 .role-period{color:var(--muted);font-size:.78rem;white-space:nowrap}
 .role-meta{font-size:.86rem;font-weight:600;margin-top:.12rem}
 .role-loc{color:var(--muted);font-size:.78rem;margin-top:.08rem}
-.role-sum{margin:.38rem 0 0;font-size:.86rem;color:#343842}
+.role-sum{margin:.38rem 0 0;font-size:.86rem;color:var(--ink)}
 .main ul{margin:.4rem 0 0;padding-left:1.05rem}
-.main li{margin:.17rem 0;font-size:.845rem;color:#343842}
+.main li{margin:.17rem 0;font-size:.845rem;color:var(--ink)}
 
 .proj{margin:0 0 .8rem;page-break-inside:avoid}
 .proj-title{font-weight:700;font-size:.97rem;letter-spacing:-.005em}
@@ -149,17 +163,21 @@ h1{margin:0;font-size:2.25rem;line-height:1.08;letter-spacing:-.02em;
    colour, written as one long chain of middle dots that nobody reads. Grey,
    and in pieces you can scan. */
 .proj-tech{display:flex;flex-wrap:wrap;gap:.2rem .22rem;margin-top:.26rem}
-.chip{font-size:.7rem;line-height:1.5;color:#4a505d;background:#f1f2f6;
+.chip{font-size:.7rem;line-height:1.5;color:var(--chip-ink);background:var(--chip);
   border-radius:3px;padding:0 .3rem;
   -webkit-print-color-adjust:exact;print-color-adjust:exact}
 /* The two or three that carry each group. Tinted rather than bolder: weight
    alone disappears at this size, and a reader scanning only these should come
    away with the right twelve words. */
-.chip.core{background:#e9e6fb;color:#3b2f8f;font-weight:600}
-.proj-sum{margin:.32rem 0 0;font-size:.865rem;color:#343842}
-.note{font-size:.84rem;color:#343842;margin:0}
+.chip.core{background:var(--core);color:var(--core-ink);font-weight:600}
+.proj-sum{margin:.32rem 0 0;font-size:.865rem;color:var(--ink)}
+.note{font-size:.84rem;color:var(--ink);margin:0}
 .marks{display:flex;flex-direction:column;align-items:flex-start;gap:.85rem;margin:.15rem 0 0}
 .marks.row{flex-direction:row;align-items:center;gap:.7rem;flex-wrap:wrap}
+/* The marks are dark ink on transparency. On a dark sheet they disappear, and
+   inverting them would wreck the seal's colours — so in dark mode they sit on
+   a light plate instead. */
+.marks{background:var(--plate);border-radius:5px;padding:var(--plate-pad,0)}
 .mark{display:block;width:auto;max-width:100%;object-fit:contain}
 .marks .txt{font-size:.78rem;color:var(--muted);font-weight:600}
 .pub{margin:0 0 .45rem}
@@ -171,6 +189,30 @@ footer{grid-column:1/-1;padding:.7rem 14mm;border-top:1px solid var(--line);
 .pg{white-space:nowrap}
 footer a{color:var(--muted)}
 
+/* Screen furniture. It is not part of the document — print drops it, and the
+   sheets below are untouched by it. */
+.topbar{position:sticky;top:0;z-index:5;background:var(--desk);
+  border-bottom:1px solid var(--line)}
+.tb{max-width:210mm;margin:0 auto;padding:.55rem .4rem;display:flex;
+  align-items:center;justify-content:space-between;gap:1rem}
+.tb-name{font-size:.82rem;font-weight:600;color:var(--muted);text-decoration:none}
+.tb-right{display:flex;align-items:center;gap:.35rem}
+.tb a.flag,.tb button{display:inline-flex;align-items:center;gap:.35rem;
+  font:inherit;font-size:.78rem;font-weight:600;color:var(--muted);
+  background:transparent;border:1px solid var(--line);border-radius:6px;
+  padding:.22rem .5rem;cursor:pointer;text-decoration:none}
+.tb a.flag.on{color:var(--ink);border-color:var(--accent);background:var(--core)}
+.tb a.flag:hover,.tb button:hover{color:var(--ink);border-color:var(--accent)}
+.tb svg{width:15px;height:11px;display:block;border-radius:1px}
+.tb button svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
+.tb .moon{display:none}
+:root[data-theme="dark"] .tb .moon{display:block}
+:root[data-theme="dark"] .tb .sun{display:none}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .tb .moon{display:block}
+  :root:not([data-theme="light"]) .tb .sun{display:none}
+}
+
 @media(max-width:720px){
   .sheet{width:auto;min-height:0;grid-template-columns:1fr;margin:0;border:0}
   .sheet + .sheet{margin-top:0;border-top:1px solid var(--line)}
@@ -181,6 +223,13 @@ footer a{color:var(--muted)}
   footer{padding:.9rem 1.25rem;flex-direction:column;gap:.3rem}
 }
 @media print{
+  .topbar{display:none}
+  /* Paper is light, whatever the screen was. A dark CV on paper is a wasted
+     cartridge and an unreadable sheet. */
+  :root,:root[data-theme="dark"]{--ink:#1c1d22;--muted:#5d6370;--line:#e3e5ea;
+    --accent:#6C5CE7;--sub:#2c2f38;--side:#f7f7fb;--bg:#fff;--desk:#fff;
+    --chip:#f1f2f6;--chip-ink:#4a505d;--core:#e9e6fb;--core-ink:#3b2f8f;
+    --track:#dde0ea;--land:#d9dce6;--plate:transparent;--plate-pad:0}
   /* The page is 210 mm wide, not a browser window. Everything is sized in rem
      off the root, so one declaration scales the whole document down to a size
      that reads properly on paper. */
@@ -290,6 +339,75 @@ def logo(name: str, alt: str, h: int = 30) -> str:
             f'src="data:image/png;base64,{data}">')
 
 
+LABELS = dict(
+    cv="CV", strengths="Strengths", skills="Skills",
+    unit="Self-assessment: how much of this I carry myself, not how much I have "
+         "read about it.",
+    steps=["lead", "strong", "working", "read & direct"],
+    map="Where the work was", languages="Languages", credentials="Credentials",
+    funded="Funded by", certified="Certified by", voluntary="Voluntary work",
+    business="Business impact", social="Social impact",
+    online="This CV, online", always="Always the current version.",
+    experience="Experience", education="Education", projects="Selected projects",
+    rest="The rest, with code and findings:", publications="Publications",
+    role="Technical Product Owner",
+    generated="Generated from <code>cv.yaml</code>. Clients are described rather "
+              "than named.", source="source",
+    theme="Light or dark", other="Deutsch", other_file="cv.de.html",
+)
+
+
+FLAGS = dict(
+    # Emoji flags do not render on Windows, and a CV is read on whatever the
+    # recruiter has. Drawn instead.
+    en='<svg viewBox="0 0 60 30" aria-hidden="true">'
+       '<rect width="60" height="30" fill="#012169"/>'
+       '<path d="M0 0 60 30M60 0 0 30" stroke="#fff" stroke-width="6"/>'
+       '<path d="M0 0 60 30M60 0 0 30" stroke="#C8102E" stroke-width="4"/>'
+       '<path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/>'
+       '<path d="M30 0v30M0 15h60" stroke="#C8102E" stroke-width="6"/></svg>',
+    de='<svg viewBox="0 0 60 30" aria-hidden="true"><rect width="60" height="10" y="0"/>'
+       '<rect width="60" height="10" y="10" fill="#DD0000"/>'
+       '<rect width="60" height="10" y="20" fill="#FFCE00"/></svg>',
+)
+
+SUN = ('<svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/>'
+       '<path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4'
+       'M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4" stroke-linecap="round"/></svg>')
+MOON = ('<svg class="moon" viewBox="0 0 24 24" aria-hidden="true">'
+        '<path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z" stroke-linejoin="round"/></svg>')
+
+# Reads the saved choice before the page paints, so a dark reader never gets a
+# white flash. Four lines, inline, because an external file would be a second
+# request for a page whose whole point is to be one file.
+THEME_JS = ("<script>(function(){try{var t=localStorage.getItem('cv-theme');"
+            "if(t)document.documentElement.dataset.theme=t;}catch(e){}})()</script>")
+
+TOGGLE_JS = ("<script>document.querySelector('.tb-theme').addEventListener('click',function(){"
+             "var r=document.documentElement,"
+             "d=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;"
+             "r.dataset.theme=d?'light':'dark';"
+             "try{localStorage.setItem('cv-theme',r.dataset.theme);}catch(e){}});</script>")
+
+
+def topbar(cv, L, links, lang):
+    """Language and theme, above the sheets and outside the document.
+
+    The page is a printable A4 document first; anything a reader needs on
+    screen lives here, in a bar that print drops entirely.
+    """
+    tabs = "".join(
+        f'<a class="flag{" on" if code == lang else ""}" href="{e(href)}" '
+        f'hreflang="{code}" title="{e(title)}">{FLAGS[code]}{code.upper()}</a>'
+        for code, href, title in links)
+    return (f'<nav class="topbar"><div class="tb">'
+            f'<a class="tb-name" href="#">{e(cv["person"]["name"])} — {e(L["cv"])}</a>'
+            f'<div class="tb-right">{tabs}'
+            f'<button class="tb-theme" type="button" title="{e(L["theme"])}" '
+            f'aria-label="{e(L["theme"])}">{SUN}{MOON}</button>'
+            f'</div></div></nav>')
+
+
 def e(x):
     return html.escape(str(x), quote=False)
 
@@ -298,20 +416,21 @@ def e(x):
 # one means "expert" or "all of my week". These say which — how much of that
 # work I carry myself — and name the step in words, because a printed 85
 # invites an argument about whether it should be 90.
-def step(level: int) -> str:
+def step(level: int, words) -> str:
     if level >= 90:
-        return "lead"
+        return words[0]
     if level >= 75:
-        return "strong"
+        return words[1]
     if level >= 60:
-        return "working"
-    return "read & direct"
+        return words[2]
+    return words[3]
 
 
-def bars(items, unit=""):
+def bars(items, unit="", words=None):
+    words = words or LABELS["steps"]
     out = "".join(
         f'<div class="bar"><div class="bar-n">{e(b["name"])}'
-        f'<span class="bar-s">{e(b.get("step") or step(int(b["level"])))}</span></div>'
+        f'<span class="bar-s">{e(b.get("step") or step(int(b["level"]), words))}</span></div>'
         f'<div class="bar-t"><div class="bar-f" style="width:{int(b["level"])}%"></div></div>'
         f'</div>' for b in items)
     return out + (f'<p class="unit">{e(unit)}</p>' if unit else "")
@@ -399,7 +518,8 @@ def edu(x):
             f'<div class="role-meta">{e(x["company"])}</div></div>')
 
 
-def render(cv):
+def render(cv, nav=(), lang_code="en"):
+    L = {**LABELS, **(cv.get('labels') or {})}
     p = cv["person"]
     links = " · ".join(f'<a href="{e(l["url"])}">{e(l["label"])}</a>' for l in p["links"])
     kpis = "".join(f'<div class="kpi"><div class="fig">{e(k["figure"])}</div>'
@@ -431,12 +551,9 @@ def render(cv):
 
     # Three projects on the page, the rest on GitHub. Seven of them at
     # paragraph length was a third sheet, and a CV that runs to three pages is
-    # read as far as the second.
-    FEATURED = ("Knowledge-graph decision intelligence",
-                "AI-enabled engineering operating model",
-                "Neurosymbolic reasoning layer")
-    shown = [x for frag in FEATURED
-             for x in cv["projects"] if x["title"].startswith(frag)]
+    # read as far as the second. Which three is marked in the data: matching on
+    # an English title fragment silently showed none at all on the German page.
+    shown = [x for x in cv["projects"] if x.get("featured")]
 
     # Where the split falls. Two roles and the profile fill the first sheet;
     # everything else follows on the second. Both sheets carry a sidebar,
@@ -462,20 +579,21 @@ def render(cv):
                 f'<span class="pg">{e(p["name"])} · {n} / 2</span></footer>')
 
     return f"""<!doctype html>
-<html lang="en"><head><meta charset="utf-8">
+<html lang="{e(lang_code)}"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{e(p['name'])} — CV</title>
+<title>{e(p['name'])} — {e(L["cv"])}</title>
 <meta name="description" content="{e(p['headline'])}">
-<style>{typeface()}{CSS}</style></head>
+<style>{typeface()}{CSS}</style>{THEME_JS}</head>
 <body>
+{topbar(cv, L, nav, lang_code)}
 
 <main class="sheet">
   <aside class="side">
     {photo()}
     <ul class="contact">{''.join(contact)}</ul>
-    <h2>{SECTION["strengths"]}Strengths</h2>
-    {bars(cv.get('strengths', []), 'Self-assessment: how much of this I carry myself, not how much I have read about it.')}
-    <h2>{SECTION["skills"]}Skills</h2>
+    <h2>{SECTION["strengths"]}{e(L["strengths"])}</h2>
+    {bars(cv.get('strengths', []), L['unit'], L['steps'])}
+    <h2>{SECTION["skills"]}{e(L["skills"])}</h2>
     {skill_block(cv['skills'])}
   </aside>
   <section class="main">
@@ -483,60 +601,72 @@ def render(cv):
     <p class="headline">{e(p['headline'])}</p>
     <p class="summary">{e(cv['summary'])}</p>
     <div class="kpis">{kpis}</div>
-    <h2>{SECTION["experience"]}Experience</h2>
+    <h2>{SECTION["experience"]}{e(L["experience"])}</h2>
     <div class="tl">{''.join(role(r) for r in cv['experience'][:2])}</div>
   </section>
-  {foot(1, 'Technical Product Owner · ' + e(p['email']))}
+  {foot(1, e(L['role']) + ' · ' + e(p['email']))}
 </main>
 
 <main class="sheet">
   <aside class="side">
-    <h2>{SECTION["map"]}Where the work was</h2>
+    <h2>{SECTION["map"]}{e(L["map"])}</h2>
     {world(cv.get('map'))}
-    <h2 class="lg">{SECTION["languages"]}Languages</h2>
+    <h2 class="lg">{SECTION["languages"]}{e(L["languages"])}</h2>
     {bars(lang_bars)}
-    <h2 class="lg">{SECTION["marks"]}Credentials</h2>
-    <h3 class="lbl">Funded by</h3>
+    <h2 class="lg">{SECTION["marks"]}{e(L["credentials"])}</h2>
+    <h3 class="lbl">{e(L["funded"])}</h3>
     <div class="marks">
       {logo('bmftr', 'German Federal Ministry of Research, Technology and Space', 52)}
     </div>
-    <h3 class="lbl">Certified by</h3>
+    <h3 class="lbl">{e(L["certified"])}</h3>
     <div class="marks">
       {logo('bsfz-siegel', 'BSFZ — research allowance certified 2026', 52)}
     </div>
-    <h3 class="lbl">Voluntary work</h3>
-    <p class="sub">Business impact</p>
+    <h3 class="lbl">{e(L["voluntary"])}</h3>
+    <p class="sub">{e(L["business"])}</p>
     <div class="marks row">
       {logo('ki-bundesverband', 'German AI Association', 21)}
       {ki_park}
     </div>
-    <p class="sub">Social impact</p>
+    <p class="sub">{e(L["social"])}</p>
     <div class="marks row">
       {logo('rotaract', 'Rotaract Club Berlin International', 27)}
     </div>
-    <h2>{SECTION["qr"]}This CV, online</h2>
+    <h2>{SECTION["qr"]}{e(L["online"])}</h2>
     {qr()}
-    <p class="map-note">adminleo.github.io/cv<br>Always the current version.</p>
+    <p class="map-note">adminleo.github.io/cv<br>{e(L["always"])}</p>
   </aside>
   <section class="main">
-    <h2>{SECTION["experience"]}Experience</h2>
+    <h2>{SECTION["experience"]}{e(L["experience"])}</h2>
     <div class="tl">{''.join(role(r) for r in cv['experience'][2:])}</div>
-    <h2>{SECTION["education"]}Education</h2>
+    <h2>{SECTION["education"]}{e(L["education"])}</h2>
     {''.join(edu(x) for x in cv['education'])}
-    <h2>{SECTION["projects"]}Selected projects</h2>
+    <h2>{SECTION["projects"]}{e(L["projects"])}</h2>
     {''.join(project(x) for x in shown)}
-    <p class="note">The rest, with code and findings: <a href="https://github.com/adminleo">github.com/adminleo</a></p>
+    <p class="note">{e(L['rest'])} <a href="https://github.com/adminleo">github.com/adminleo</a></p>
 
-    <h2>{SECTION["publications"]}Publications</h2>
+    <h2>{SECTION["publications"]}{e(L["publications"])}</h2>
     {publications}
 
   </section>
-  {foot(2, 'Generated from <code>cv.yaml</code>. Clients are described rather than '
-           'named. <a href="https://github.com/adminleo/cv">source</a>')}
+  {foot(2, L['generated'] + ' <a href="https://github.com/adminleo/cv">' + e(L['source']) + '</a>')}
 </main>
 
+{TOGGLE_JS}
 </body></html>
 """
+
+
+# One document, two languages. Deployed, English is the entry point and German
+# sits beside it; locally the names stay distinct so neither shadows the other
+# in a directory listing.
+EDITIONS = [("en", "cv.yaml"), ("de", "cv.de.yaml")]
+
+
+def pages(out: pathlib.Path, deployed: bool) -> dict:
+    names = {"en": "index.html" if deployed else "cv.html",
+             "de": "de.html" if deployed else "cv.de.html"}
+    return names
 
 
 if __name__ == "__main__":
@@ -544,8 +674,14 @@ if __name__ == "__main__":
     ap.add_argument("--out", default=".")
     a = ap.parse_args()
     root = pathlib.Path(__file__).parent
-    cv = yaml.safe_load((root / "cv.yaml").read_text(encoding="utf-8"))
     d = pathlib.Path(a.out); d.mkdir(parents=True, exist_ok=True)
-    name = "index.html" if a.out != "." else "cv.html"
-    (d / name).write_text(render(cv), encoding="utf-8")
-    print(f"written {d / name}")
+    names = pages(d, a.out != ".")
+    titles = {"en": "English", "de": "Deutsch"}
+    for lang, data in EDITIONS:
+        f = root / data
+        if not f.exists():
+            continue
+        cv = yaml.safe_load(f.read_text(encoding="utf-8"))
+        links = [(c, names[c], titles[c]) for c, _ in EDITIONS if (root / dict(EDITIONS)[c]).exists()]
+        (d / names[lang]).write_text(render(cv, links, lang), encoding="utf-8")
+        print(f"written {d / names[lang]}")

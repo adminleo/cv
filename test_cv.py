@@ -15,6 +15,12 @@ import build
 
 ROOT = pathlib.Path(__file__).parent
 CV = yaml.safe_load((ROOT / "cv.yaml").read_text(encoding="utf-8"))
+# Both editions carry the same claims and the same rule about clients, so both
+# face the same guards. A denylist that only reads the English page would miss
+# a client named in German, which is the likelier mistake: the German text is
+# the one written closer to how I talk about the work.
+EDITIONS = {lang: yaml.safe_load((ROOT / f).read_text(encoding="utf-8"))
+            for lang, f in build.EDITIONS if (ROOT / f).exists()}
 
 # Clients and customers, never to appear in the rendered page.
 # Employers (Creativate, Camsol, Karla, Bornhäußer & Friends) are deliberately absent here.
@@ -41,16 +47,47 @@ def prose(page: str) -> str:
 class PublicCV(unittest.TestCase):
     def setUp(self):
         self.page = prose(build.render(CV))
+        self.pages = {lang: prose(build.render(cv, (), lang))
+                      for lang, cv in EDITIONS.items()}
 
     def test_no_client_is_named(self):
         # word boundaries, or a short acronym like ING matches "banking"
-        hits = [c for c in CLIENTS
-                if re.search(rf"\b{re.escape(c)}\b", self.page, re.I)]
-        self.assertEqual(hits, [], f"client names leaked into the public CV: {hits}")
+        for lang, page in self.pages.items():
+            hits = [c for c in CLIENTS
+                    if re.search(rf"\b{re.escape(c)}\b", page, re.I)]
+            self.assertEqual(hits, [], f"client names leaked into {lang}: {hits}")
 
     def test_no_address_or_phone(self):
-        hits = [h for h in PRIVATE_HINTS if h.lower() in self.page.lower()]
-        self.assertEqual(hits, [], f"private contact details leaked: {hits}")
+        for lang, page in self.pages.items():
+            hits = [h for h in PRIVATE_HINTS if h.lower() in page.lower()]
+            self.assertEqual(hits, [], f"private contact details leaked into {lang}: {hits}")
+
+    def test_both_editions_say_the_same_things(self):
+        """Not a translation check — a structure check. A section that exists
+        in one language and not the other is a page that quietly says less to
+        half its readers."""
+        shape = {lang: (len(cv["experience"]), len(cv["skills"]),
+                        len([x for x in cv["projects"] if x.get("featured")]),
+                        len(cv["languages"]), len(cv["publications"]),
+                        len(cv["kpis"]), len(cv["strengths"]))
+                 for lang, cv in EDITIONS.items()}
+        self.assertEqual(len(set(shape.values())), 1, shape)
+
+    def test_every_edition_offers_the_other_one(self):
+        nav = [("en", "index.html", "English"), ("de", "de.html", "Deutsch")]
+        for lang, cv in EDITIONS.items():
+            page = build.render(cv, nav, lang)
+            self.assertIn('class="topbar"', page)
+            self.assertIn('href="de.html"', page)
+            self.assertIn('href="index.html"', page)
+            self.assertIn(f'class="flag on" href="{dict((a, b) for a, b, _ in nav)[lang]}"', page)
+
+    def test_print_goes_back_to_light(self):
+        """A dark CV on paper is a wasted cartridge. Whatever the screen was,
+        the print block resets the palette."""
+        page = build.render(CV)
+        block = page[page.index("@media print{"):]
+        self.assertIn('--bg:#fff', block)
 
     def test_contact_is_email_and_links_only(self):
         p = CV["person"]

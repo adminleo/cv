@@ -83,7 +83,7 @@ experience:
       - "Product management in publicly funded R&D: consortium rounds, roadmap steered against funding goals, ~€2.5 M funding volume coordinated; lead of a BSFZ-certified R&D project on the German Deutschland-Stack and FITKO standards (XÖV, FIM/LeiKa, NOOTS)"
       - "Regulated environments: AI architecture and business value at C-level with a stock-exchange group, a listed commercial-property bank and a DAX-listed healthcare group"
 
-  - title: Co-Founder & Head of Operations
+  - title: Head of Operations & Co-Founder
     company: Camsol group — company builder (today seventy2 Holding GmbH)
     period: Nov 2022 – Apr 2025
     location: Berlin · locations in Europe, sub-Saharan Africa and South Asia
@@ -130,7 +130,7 @@ skills:
             OKRs & KPIs, PMO, Funded & consortium projects, Nearshore delivery]
   - group: Architecture, cloud & data
     core:  [Microservices, Kubernetes, AWS]
-    items: [REST / OpenAPI, Event-driven, Docker, CI/CD, Azure · GCP,
+    items: [REST / OpenAPI, Event-driven, Docker, CI/CD, Azure · GCP · Hetzner,
             On-premise · air-gapped, PostgreSQL · pgvector, Graph DB,
             Observability, Java / Spring (advisory)]
   - group: AI, agents & data
@@ -146,6 +146,7 @@ skills:
 
 projects:
   - title: "Neurosymbolic reasoning layer — propose neurally, verify symbolically"
+    featured: true
     period: 2026 – present · founder, architect & lead · publicly funded R&D
     tech: Python · knowledge graph · OWL/SHACL-style constraints · GraphRAG · open models · automated test suite
     summary: >-
@@ -164,6 +165,7 @@ projects:
       Traceability and data sovereignty as design constraints.
 
   - title: "AI-enabled engineering operating model"
+    featured: true
     period: 2024 – present · owner · over 1 million lines of code since 01/2026
     tech: Agentic coding · Anthropic/OpenAI/Gemini APIs · Ollama on-premise · MCP · GitHub Actions · ADRs · offline test gates
     summary: >-
@@ -184,6 +186,7 @@ projects:
       separately.
 
   - title: "Knowledge-graph decision intelligence — open-core platform"
+    featured: true
     period: 2024 – present · founder, architect & lead
     tech: Next.js/TypeScript · Python/FastAPI microservices · PostgreSQL/pgvector · graph DB · GPU worker · Docker · Kubernetes/Terraform · AGPL-3.0 + commercial licence
     summary: >-
