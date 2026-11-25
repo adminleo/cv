@@ -103,7 +103,12 @@ h1{margin:0;font-size:2.25rem;line-height:1.08;letter-spacing:-.02em;
   font-weight:750;color:var(--accent)}
 .headline{margin:.28rem 0 .9rem;color:var(--muted);font-weight:600;font-size:.95rem;
   letter-spacing:.01em}
-.summary{margin:0;font-size:.92rem;color:#343842}
+/* The profile is the one block long enough to be a rectangle, and it sits
+   directly above the ruled figure band — flush on both edges, the two read as
+   one object. Hyphenation is not optional with justification at this measure:
+   without it the lines open up into rivers. */
+.summary{margin:0;font-size:.92rem;color:#343842;
+  text-align:justify;hyphens:auto;-webkit-hyphens:auto}
 .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem 0;margin:1.15rem 0 0;
   border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:.7rem 0}
 /* Hairlines rather than gaps: six figures floating in white read as six
