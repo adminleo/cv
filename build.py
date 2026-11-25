@@ -397,7 +397,7 @@ def render(cv):
         grade, _, rest = l["level"].partition("·")
         name = l["name"] + (f' · {rest.strip()}' if rest.strip() else "")
         return dict(name=name, step=grade.strip(),
-                    level=100 if "native" in grade.lower() else 95)
+                    level=l.get("bar", 100 if "native" in grade.lower() else 95))
 
     lang_bars = [lang(l) for l in cv["languages"]]
 
@@ -434,7 +434,7 @@ def render(cv):
 
     # Taller than the others: this mark is a stacked wordmark beside a ring,
     # so matching its cap height to theirs makes the whole lockup shrink.
-    ki_park = (logo("ki-park", "KI Park e.V.", 23)
+    ki_park = (logo("ki-park", "KI Park e.V.", 19)
                or '<span class="txt">KI Park e.V.</span>')
 
     def foot(n, left):
@@ -490,7 +490,7 @@ def render(cv):
     </div>
     <h3 class="lbl">Voluntary work</h3>
     <div class="marks row">
-      {logo('ki-bundesverband', 'German AI Association', 17)}
+      {logo('ki-bundesverband', 'German AI Association', 21)}
       {ki_park}
     </div>
     <h2>{SECTION["qr"]}This CV, online</h2>
