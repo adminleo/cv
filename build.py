@@ -490,6 +490,7 @@ def render(cv):
     <div class="marks row">
       {logo('ki-bundesverband', 'German AI Association', 21)}
       {ki_park}
+      {logo('rotaract', 'Rotaract Club Berlin International', 26)}
     </div>
     <h2>{SECTION["qr"]}This CV, online</h2>
     {qr()}
