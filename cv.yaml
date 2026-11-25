@@ -6,7 +6,7 @@
 
 person:
   name: Leonardo Bornhäußer
-  headline: Technical Product Owner & Architect · AI products in regulated environments
+  headline: Technical Product Owner & Architect · Venture builder · AI in regulated environments
   location: Berlin · remote
   email: leonardo@creativate.tech
   links:
@@ -28,13 +28,16 @@ summary: >-
   the data-driven side of the role. Regulated environments from the inside: the
   German savings banks group, public administration, C-level work with listed
   financial and healthcare groups. As co-founder of a company builder I built
-  and led international, multilingual teams of roughly 100 people.
+  and led international, multilingual teams of roughly 100 people. I build the
+  venture around the product as readily as the product: eight companies
+  founded, ~€3 M raised, one exit done and a second under way.
 
 strengths:
   - { name: Product ownership & delivery,     level: 95 }
   - { name: "Architecture & system design",   level: 90 }
   - { name: Team leadership & scaling,        level: 90 }
   - { name: "Applied AI, agents & LLM orchestration", level: 90 }
+  - { name: "Venture building & funding",     level: 85 }
   - { name: "Data analysis & experiment design", level: 70 }
   # Deliberately half. I read, review and direct code every day and decide the
   # architecture around it; I am not the one writing the bulk of it, and a bar
@@ -75,7 +78,6 @@ experience:
       focus: EU-sovereign, on-premise-capable AI and agent systems, built with
       consultancies as an alternative to third-country providers.
     bullets:
-      - Analysed, prioritised and shepherded requirements; made architecture and technology decisions; agile delivery (Scrum/Kanban) with planning, reviews and refinement
       - Built a knowledge-graph decision-intelligence platform from the first line of code to a productive on-premise proof of concept with a city administration and to enterprise tenants; in 2026 replaced the monolith with a service platform including dedicated identity (OIDC) and billing services
       - Introduced an AI-enabled engineering operating model — ticket as specification, agents with MCP access, human review and tests, a confirmation gate before irreversible actions, AI consumption tracked per project and role
       - "Product management in publicly funded R&D: consortium rounds, roadmap steered against funding goals, ~€2.5 M funding volume coordinated; lead of a BSFZ-certified R&D project on the German Deutschland-Stack and FITKO standards (XÖV, FIM/LeiKa, NOOTS)"
