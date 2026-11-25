@@ -61,6 +61,11 @@ h2 svg{width:13px;height:13px;flex:0 0 auto;stroke-width:2.1}
    next to the logos and bars underneath them. */
 h2.lg svg{width:18px;height:18px;stroke-width:1.9}
 h3.lbl{margin:.75rem 0 .25rem;font-size:.78rem;letter-spacing:.06em;color:var(--sub)}
+/* One step quieter than the label above it: these sort the marks, they do not
+   announce a new section. */
+.sub{margin:.5rem 0 .1rem;font-size:.68rem;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--muted)}
+.sub:first-of-type{margin-top:.3rem}
 h3.lbl:first-of-type{margin-top:.35rem}
 .side h2:first-of-type{margin-top:0}
 h3{margin:.95rem 0 .3rem;font-size:.7rem;font-weight:700;letter-spacing:.07em;
@@ -487,10 +492,14 @@ def render(cv):
       {logo('bsfz-siegel', 'BSFZ — research allowance certified 2026', 52)}
     </div>
     <h3 class="lbl">Voluntary work</h3>
+    <p class="sub">Business impact</p>
     <div class="marks row">
       {logo('ki-bundesverband', 'German AI Association', 21)}
       {ki_park}
-      {logo('rotaract', 'Rotaract Club Berlin International', 26)}
+    </div>
+    <p class="sub">Social impact</p>
+    <div class="marks row">
+      {logo('rotaract', 'Rotaract Club Berlin International', 39)}
     </div>
     <h2>{SECTION["qr"]}This CV, online</h2>
     {qr()}
